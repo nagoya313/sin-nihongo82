@@ -1,3 +1,4 @@
+import { ColorModeScript } from '@chakra-ui/react';
 import { Head, Html, Main, NextScript } from 'next/document';
 
 const Document = () => (
@@ -7,6 +8,7 @@ const Document = () => (
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <body>
+      <ColorModeScript />
       <Main />
       <NextScript />
     </body>
