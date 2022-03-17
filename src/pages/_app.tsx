@@ -1,6 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { Layout } from '../components/templates/Layout';
 
 const App = ({ Component, pageProps }: AppProps) => (
   <>
@@ -8,7 +9,9 @@ const App = ({ Component, pageProps }: AppProps) => (
       <title>新日本語</title>
     </Head>
     <ChakraProvider>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ChakraProvider>
   </>
 );

@@ -1,13 +1,5 @@
-import type { NextPage } from 'next';
+import { Heading } from '@chakra-ui/react';
 
-const Home: NextPage = () => {
-  return (
-    <div>
-      <main>
-        <h1>新日本語えようこそ！</h1>
-      </main>
-    </div>
-  );
-};
+const Home = () => <Heading mt={8}>新日本語の世界えよーこそ！</Heading>;
 
 export default Home;
