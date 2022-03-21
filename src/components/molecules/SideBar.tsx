@@ -12,6 +12,7 @@ export const SideBar = ({ onClose }: SideBarProps) => (
     <Heading as="h5" size="sm" mt={1} ml={2}>
       メニュー
     </Heading>
+    <SideBarLink href={Path.radicals} title="部首索引" icon={MdOutlineInfo} onClick={onClose} />
     <SideBarLink href={Path.info} title="このサイトについて" icon={MdOutlineInfo} onClick={onClose} />
   </Stack>
 );
