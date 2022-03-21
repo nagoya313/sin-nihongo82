@@ -1,9 +1,7 @@
-import { Heading } from '@chakra-ui/react';
+import { ErrorPage } from '../components/templates/ErrorPage';
 
 const InternalError = () => (
-  <Heading as="h6" size="xs">
-    エラーが発生しました。
-  </Heading>
+  <ErrorPage errorType="500" title="Internal Server Error" text="なんらかのエラーが発生しました。" />
 );
 
 export default InternalError;

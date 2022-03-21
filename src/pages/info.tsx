@@ -1,11 +1,16 @@
-import { Heading, ListItem, Text, UnorderedList } from '@chakra-ui/react';
+import { Heading, HStack, ListItem, Text, UnorderedList } from '@chakra-ui/react';
+import { MdOutlineInfo } from 'react-icons/md';
+import { CircleIcon } from '../components/atoms/CircleIcon';
 import { ExternalLink } from '../components/atoms/ExternalLink';
 
 const Info = () => (
   <>
-    <Heading mt={8} mb={4}>
-      このサイトについて
-    </Heading>
+    <HStack mt={8} mb={4}>
+      <CircleIcon>
+        <MdOutlineInfo />
+      </CircleIcon>
+      <Heading>このサイトについて</Heading>
+    </HStack>
     <Text mb={4}>
       新日本語わ、現在日本で使われる漢字の字形の混乱お解決するため、徹底的な漢字の簡化お行うことお目的としたプロジェクトです。
       新日本語明朝とゆーフォントを生成して公開することで、誰でも自由にこの簡化された漢字お文書で使うことができるよーになる予定です。

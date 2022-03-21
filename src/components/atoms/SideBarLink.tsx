@@ -1,4 +1,4 @@
-import { Center, HStack, Icon, LinkBox, LinkOverlay, Text, useColorModeValue } from '@chakra-ui/react';
+import { HStack, Icon, LinkBox, LinkOverlay, Text, useColorModeValue } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { type IconType } from 'react-icons';
@@ -18,16 +18,19 @@ export const SideBarLink = ({ href, title, icon, onClick }: SideBarLinkProps) =>
 
   return (
     <LinkBox onClick={onClick}>
-      <HStack p={1} rounded="md" bg={selected ? selectedBg : undefined} color={selected ? selectedColor : undefined}>
-        <NextLink href={href} passHref>
-          <LinkOverlay onClick={onClick}>
-            <Center>
-              <Icon ml={2} mr={4} as={icon} />
-              <Text>{title}</Text>
-            </Center>
-          </LinkOverlay>
-        </NextLink>
-      </HStack>
+      <NextLink href={href} passHref>
+        <LinkOverlay onClick={onClick}>
+          <HStack
+            p={1}
+            rounded="md"
+            bg={selected ? selectedBg : undefined}
+            color={selected ? selectedColor : undefined}
+          >
+            <Icon ml={2} as={icon} />
+            <Text>{title}</Text>
+          </HStack>
+        </LinkOverlay>
+      </NextLink>
     </LinkBox>
   );
 };
