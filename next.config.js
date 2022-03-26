@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   experimental: {
     serverComponents: true,
-    runtime: 'nodejs',
+    runtime: 'edge',
   },
 };
 
