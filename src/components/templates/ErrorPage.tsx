@@ -1,5 +1,4 @@
-import { Heading, HStack, VStack } from '@chakra-ui/react';
-import { CircleIcon } from '../atoms/CircleIcon';
+import PageTitle from '../molecules/PageTitle.client';
 
 type ErrorPageProps = {
   errorType: '404' | '500';
@@ -8,13 +7,8 @@ type ErrorPageProps = {
 };
 
 export const ErrorPage = ({ errorType, title, text }: ErrorPageProps) => (
-  <VStack mt={8} align="start" spacing={4}>
-    <HStack>
-      <CircleIcon>{errorType}</CircleIcon>
-      <Heading>{title}</Heading>
-    </HStack>
-    <Heading as="h6" size="xs">
-      {text}
-    </Heading>
-  </VStack>
+  <article className="mt-8">
+    <PageTitle avatar={<p className="text-white">{errorType}</p>} title={title} />
+    <p>{text}</p>
+  </article>
 );

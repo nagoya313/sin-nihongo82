@@ -1,20 +1,19 @@
-import { ChakraProvider } from '@chakra-ui/react';
+import { ThemeProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { Layout } from '../components/templates/Layout';
-import { global } from '../styles/global';
+import '../styles/global.css';
 
 const App = ({ Component, pageProps }: AppProps) => (
   <>
     <Head>
       <title>新日本語</title>
     </Head>
-
-    <ChakraProvider theme={global}>
+    <ThemeProvider attribute="data-theme">
       <Layout>
         <Component {...pageProps} />
       </Layout>
-    </ChakraProvider>
+    </ThemeProvider>
   </>
 );
 

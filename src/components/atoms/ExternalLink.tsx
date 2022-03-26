@@ -1,12 +1,10 @@
-import { Link, useColorModeValue } from '@chakra-ui/react';
-
 type ExternalLinkProps = {
   href: string;
   children: React.ReactNode;
 };
 
 export const ExternalLink = ({ href, children }: ExternalLinkProps) => (
-  <Link ml={1} mr={1} href={href} isExternal color={useColorModeValue('purple.600', 'purple.300')}>
+  <a href={href} target="_blank" rel="noopener noreferrer" className="link link-primary link-hover mx-1">
     {children}
-  </Link>
+  </a>
 );

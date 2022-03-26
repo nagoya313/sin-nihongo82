@@ -1,70 +1,31 @@
-import {
-  Avatar,
-  Box,
-  Divider,
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerHeader,
-  Flex,
-  useDisclosure,
-  VStack,
-} from '@chakra-ui/react';
-import { HEADER_HEIGHT } from '../../styles/constants';
-import { SideBar } from '../molecules/SideBar';
-import { AppBar } from '../organisms/AppBar';
-import { Footer } from '../organisms/Footer';
+import SideBar from '../molecules/SideBar.client';
+import AppBar from '../organisms/AppBar.client';
+import Footer from '../organisms/Footer.client';
 
 type LayoutProps = {
   children: React.ReactNode;
 };
 
-export const Layout = ({ children }: LayoutProps) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  return (
-    <>
-      <AppBar onSideBarOpen={onOpen} />
-      <Box h={HEADER_HEIGHT} />
-      <VStack
-        p={2}
-        w={{ base: 'full', md: 60 }}
-        pos="fixed"
-        h="full"
-        borderRightWidth="1px"
-        display={{ base: 'none', md: 'block' }}
-      >
-        <SideBar onClose={onClose} />
-      </VStack>
-      <Divider orientation="vertical" />
-      <Drawer
-        autoFocus={false}
-        isOpen={isOpen}
-        placement="left"
-        onClose={onClose}
-        returnFocusOnClose={false}
-        onOverlayClick={onClose}
-        size="full"
-      >
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader shadow="md">
-            <Avatar size="sm" src="/favicon.ico" mr={2} />
-            新日本語
-          </DrawerHeader>
-          <DrawerBody>
-            <SideBar onClose={onClose} />
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
-      <Flex direction="column" ml={{ base: 0, md: 60 }} minH={`calc(100VH - ${HEADER_HEIGHT * 4}px)`}>
-        <Box flex={1} p={8}>
-          {children}
-        </Box>
-        <Divider />
-        <Footer />
-      </Flex>
-    </>
-  );
-};
+export const Layout = ({ children }: LayoutProps) => (
+  <div className="drawer h-screen w-full">
+    <input id="nav-drawer" type="checkbox" className="drawer-toggle" />
+    <div className="drawer-content flex flex-col">
+      <AppBar />
+      <div className="flex h-full">
+        <div className="w-80 hidden md:block border-r">
+          <SideBar />
+        </div>
+        <div className="flex flex-col w-full">
+          <div className="flex flex-1 p-8 prose max-w-none">{children}</div>
+          <Footer />
+        </div>
+      </div>
+    </div>
+    <div className="drawer-side">
+      <label htmlFor="nav-drawer" className="drawer-overlay" />
+      <div className="overflow-y-auto bg-base-100 w-80">
+        <SideBar />
+      </div>
+    </div>
+  </div>
+);
