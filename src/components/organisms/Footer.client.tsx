@@ -1,18 +1,20 @@
-import GithubIcon from '../icons/GithubIcon.client';
+import { HStack, Link, Text, useColorModeValue } from '@chakra-ui/react';
+import { SiGithub } from 'react-icons/si';
 
 const Footer = () => (
-  <footer className="footer flex items-center text-base-content justify-end p-4 border-t">
-    <a
+  <HStack as="footer" p={4} ml="auto" mr={0}>
+    <Link
       href="https://github.com/nagoya313/sin-nihongo82"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="btn btn-ghost btn-xs text-gray-400 items-center"
+      isExternal
       color="gray.400"
+      _hover={{ color: useColorModeValue('gray.700', 'gray.600') }}
     >
-      <GithubIcon />
-    </a>
-    <p className="font-xs">2682 新日本語漢字形制定委員会</p>
-  </footer>
+      <SiGithub />
+    </Link>
+    <Text fontSize="xs" align="right">
+      2682 新日本語漢字形制定委員会
+    </Text>
+  </HStack>
 );
 
 export default Footer;

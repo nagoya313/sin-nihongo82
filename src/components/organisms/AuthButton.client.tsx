@@ -1,30 +1,30 @@
 import { useUser } from '@auth0/nextjs-auth0';
+import { Button, useToast } from '@chakra-ui/react';
+import { useEffect } from 'react';
+import AdminMenu from '../molecules/AdminMenu.client';
 
 const AuthButton = () => {
+  const toast = useToast();
   const { user, error, isLoading } = useUser();
 
-  /*useEffect(() => {
+  useEffect(() => {
     if (error != null) {
       toast({
         title: 'サインインに失敗しました。',
         description: error.message,
         status: 'error',
-        duration: 9000,
+        duration: 3000,
         isClosable: true,
       });
     }
-  }, [toast, error]);*/
+  }, [toast, error]);
 
   return user != null ? (
-    <div className="avatar">
-      <div className="w-12">
-        <img src={user.picture ?? undefined} />
-      </div>
-    </div>
+    <AdminMenu user={user} />
   ) : (
-    <a href="/api/auth/login" className="btn btn-ghost btn-sm" disabled={true}>
+    <Button as="a" href="/api/auth/login" disabled={isLoading}>
       Sign in
-    </a>
+    </Button>
   );
 };
 

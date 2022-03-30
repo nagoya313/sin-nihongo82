@@ -1,15 +1,30 @@
+import { Heading, HStack, Spacer, Text, VStack } from '@chakra-ui/react';
+
 type PageTitleProps = {
   avatar: React.ReactNode;
   title: string;
+  subText?: string;
+  action?: React.ReactNode;
 };
 
-const PageTitle = ({ avatar, title }: PageTitleProps) => (
-  <div className="flex flex-row items-center">
-    <div className="avatar placeholder">
-      <div className="rounded-full w-12 h-12 text-white bg-accent">{avatar}</div>
-    </div>
-    <h1 className="ml-4 mb-0">{title}</h1>
-  </div>
+const PageTitle = ({ avatar, title, subText, action }: PageTitleProps) => (
+  <HStack spacing={4} mt={8}>
+    {avatar}
+    <VStack align="start">
+      <Heading size="sm">{title}</Heading>
+      {subText && (
+        <Text fontSize="xs" color="gray">
+          {subText}
+        </Text>
+      )}
+    </VStack>
+    {action && (
+      <>
+        <Spacer />
+        {action}
+      </>
+    )}
+  </HStack>
 );
 
 export default PageTitle;

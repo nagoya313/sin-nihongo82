@@ -1,14 +1,18 @@
+import { IconButton, useColorMode } from '@chakra-ui/react';
 import { MdLightMode, MdNightlight } from 'react-icons/md';
-import { useHydrateTheme } from '../../libs/hooks/useHydrateTheme';
 
 const ColorChangeButton = () => {
-  const { theme, setTheme } = useHydrateTheme();
-  const colorChange = () => setTheme(theme === 'dark' ? 'light' : 'dark');
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <button className="btn btn-ghost btn-sm text-gray-400 text-lg" onClick={colorChange}>
-      {theme === 'dark' ? <MdLightMode /> : <MdNightlight />}
-    </button>
+    <IconButton
+      onClick={toggleColorMode}
+      aria-label="change color mode"
+      variant="ghost"
+      color="gray.400"
+      fontSize={20}
+      icon={colorMode === 'light' ? <MdNightlight /> : <MdLightMode />}
+    />
   );
 };
 
