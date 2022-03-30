@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { MdMenu } from 'react-icons/md';
 import { useHydrateTheme } from '../../libs/hooks/useHydrateTheme';
 import ColorChangeButton from '../atoms/ColorChangeButton.client';
+import AuthButton from './AuthButton.client';
 
 const AppBar = () => {
   const { theme } = useHydrateTheme();
@@ -26,7 +27,7 @@ const AppBar = () => {
       </Link>
       <div className="flex">
         <ColorChangeButton />
-        <button className="btn btn-ghost btn-sm">Sign in</button>
+        <AuthButton />
       </div>
     </div>
   );
