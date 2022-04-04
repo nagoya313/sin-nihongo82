@@ -1,3 +1,4 @@
+import { useUser } from '@auth0/nextjs-auth0';
 import {
   Avatar,
   Box,
@@ -9,8 +10,10 @@ import {
   DrawerHeader,
   Flex,
   useDisclosure,
+  useToast,
   VStack,
 } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import { HEADER_HEIGHT } from '../../styles/constants';
 import SideBar from '../molecules/SideBar.client';
 import AppBar from '../organisms/AppBar.client';
@@ -21,7 +24,21 @@ type LayoutProps = {
 };
 
 const Layout = ({ children }: LayoutProps) => {
+  const toast = useToast();
+  const { error } = useUser();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  useEffect(() => {
+    if (error?.message != null) {
+      toast({
+        title: 'サインインに失敗しました。',
+        description: error.message,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  }, [toast, error?.message]);
 
   return (
     <>
