@@ -1,5 +1,8 @@
-import { Heading, ListItem, Text, UnorderedList } from '@chakra-ui/react';
 import ExternalLink from '../components/atoms/ExternalLink.client';
+import Heading from '../components/chakra-ui/Heading.client';
+import ListItem from '../components/chakra-ui/ListItem.client';
+import Text from '../components/chakra-ui/Text.client';
+import UnorderedList from '../components/chakra-ui/UnorderedList.client';
 import InfoIcon from '../components/icons/InfoIcon.client';
 import PageTitle from '../components/molecules/PageTitle.client';
 
