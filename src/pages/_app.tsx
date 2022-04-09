@@ -3,19 +3,27 @@ import { ChakraProvider } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Layout from '../components/templates/Layout.client';
+import { useAppFix } from '../libs/hooks/useAppFix';
 import { global } from '../styles/global';
 
-const App = ({ Component, pageProps }: AppProps) => (
-  <UserProvider>
-    <ChakraProvider theme={global}>
-      <Head>
-        <title>新日本語</title>
-      </Head>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ChakraProvider>
-  </UserProvider>
-);
+const App = ({ Component, pageProps }: AppProps) => {
+  const { isReturnNull, isReturnEmpty } = useAppFix();
+
+  if (isReturnNull) return null;
+  if (isReturnEmpty) return <></>;
+
+  return (
+    <UserProvider>
+      <ChakraProvider theme={global}>
+        <Head>
+          <title>新日本語</title>
+        </Head>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ChakraProvider>
+    </UserProvider>
+  );
+};
 
 export default App;
