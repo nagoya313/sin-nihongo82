@@ -1,10 +1,6 @@
-import dotenv from 'dotenv';
 import { FileMigrationProvider, Migrator } from 'kysely';
 import { connectDatabase } from './connection';
-
-console.log(process.env['NODE_ENV']);
-
-dotenv.config({ path: `.env.${process.env['NODE_ENV']}.local` });
+import './env';
 
 (async () => {
   const db = connectDatabase();
