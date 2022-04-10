@@ -1,12 +1,11 @@
-import { Flex, Icon, Link, useColorModeValue } from '@chakra-ui/react';
+import { Flex, Link, useColorModeValue } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import { type IconType } from 'react-icons';
 
 type SideBarLinkProps = {
   title: string;
   href: string;
-  icon: IconType;
+  icon: React.ReactNode;
   onClick: () => void;
 };
 
@@ -29,7 +28,7 @@ const SideBarLink = ({ href, title, icon, onClick }: SideBarLinkProps) => {
           bg={pathname === href ? selectedBg : undefined}
           color={pathname === href ? selectedColor : undefined}
         >
-          <Icon mr={4} fontSize={16} as={icon} />
+          {icon}
           {title}
         </Flex>
       </Link>

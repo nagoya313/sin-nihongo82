@@ -1,11 +1,10 @@
-import { Icon } from '@chakra-ui/react';
+import { Icon, type IconProps } from '@chakra-ui/react';
 import { MdOutlinePark } from 'react-icons/md';
-import CircleIcon from '../atoms/CircleIcon.client';
 
-const RadicalIcon = () => (
-  <CircleIcon>
-    <Icon fontSize={24} as={MdOutlinePark} />
-  </CircleIcon>
+type RadicalIconProps = Omit<IconProps, 'as'>;
+
+const RadicalIcon = ({ fontSize = 24, ...props }: RadicalIconProps) => (
+  <Icon {...props} fontSize={fontSize} as={MdOutlinePark} />
 );
 
 export default RadicalIcon;

@@ -1,4 +1,5 @@
 import { Heading, HStack, Spacer, Text, VStack } from '@chakra-ui/react';
+import CircleIcon from '../atoms/CircleIcon.client';
 
 type PageTitleProps = {
   avatar: React.ReactNode;
@@ -9,7 +10,7 @@ type PageTitleProps = {
 
 const PageTitle = ({ avatar, title, subText, action }: PageTitleProps) => (
   <HStack spacing={4} mt={8}>
-    {avatar}
+    <CircleIcon>{avatar}</CircleIcon>
     <VStack align="start">
       <Heading size="sm">{title}</Heading>
       {subText && (

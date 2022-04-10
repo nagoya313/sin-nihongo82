@@ -1,11 +1,10 @@
-import { Icon } from '@chakra-ui/react';
+import { Icon, type IconProps } from '@chakra-ui/react';
 import { MdOutlineInfo } from 'react-icons/md';
-import CircleIcon from '../atoms/CircleIcon.client';
 
-const InfoIcon = () => (
-  <CircleIcon>
-    <Icon fontSize={24} as={MdOutlineInfo} />
-  </CircleIcon>
+type InfoIconProps = Omit<IconProps, 'as'>;
+
+const InfoIcon = ({ fontSize = 24, ...props }: InfoIconProps) => (
+  <Icon {...props} fontSize={fontSize} as={MdOutlineInfo} />
 );
 
 export default InfoIcon;
