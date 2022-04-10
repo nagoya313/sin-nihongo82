@@ -5,9 +5,10 @@ import Text from '../components/chakra-ui/Text.client';
 import UnorderedList from '../components/chakra-ui/UnorderedList.client';
 import InfoIcon from '../components/icons/InfoIcon.client';
 import PageTitle from '../components/molecules/PageTitle.client';
+import Page from '../components/templates/Page.client';
 
 const Info = () => (
-  <>
+  <Page title="info">
     <PageTitle avatar={<InfoIcon />} title="このサイトについて" />
     <Text mt={4} mb={4}>
       新日本語わ、現在日本で使われる漢字の字形の混乱お解決するため、徹底的な漢字の簡化お行うことお目的としたプロジェクトです。
@@ -49,7 +50,7 @@ const Info = () => (
       <ExternalLink href="https://www.npmjs.com/package/@kurgm/kage-engine">@kurgm/kage-engine</ExternalLink>
       お使っているので、グリフウィキとわ表示されるグリフに差異が生じる場合があります。
     </Text>
-  </>
+  </Page>
 );
 
 export default Info;

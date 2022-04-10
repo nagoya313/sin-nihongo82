@@ -1,21 +1,11 @@
-import { UserProvider } from '@auth0/nextjs-auth0';
-import { ChakraProvider } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
-import Head from 'next/head';
-import Layout from '../components/templates/Layout.client';
-import { global } from '../styles/global';
+import Layout from '../components/organisms/Layout.client';
 
+// LayoutでComponentを括らないとHydrate errorが起きて謎
 const App = ({ Component, pageProps }: AppProps) => (
-  <UserProvider>
-    <ChakraProvider theme={global}>
-      <Head>
-        <title>新日本語</title>
-      </Head>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ChakraProvider>
-  </UserProvider>
+  <Layout>
+    <Component {...pageProps} />
+  </Layout>
 );
 
 export default App;
