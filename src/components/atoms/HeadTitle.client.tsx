@@ -1,13 +1,13 @@
 import Head from 'next/head';
 
-type TitleProps = {
+type HeadTitleProps = {
   title?: string;
 };
 
-const Title = ({ title }: TitleProps) => (
+const HeadTitle = ({ title }: HeadTitleProps) => (
   <Head>
     {typeof window === 'undefined' || title == null ? <title>新日本語</title> : <title>新日本語｜{title}</title>}
   </Head>
 );
 
-export default Title;
+export default HeadTitle;

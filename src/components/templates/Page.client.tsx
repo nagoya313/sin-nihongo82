@@ -1,4 +1,4 @@
-import Title from '../atoms/Title.client';
+import HeadTitle from '../atoms/HeadTitle.client';
 import Layout from '../organisms/Layout.client';
 
 type PageProps = {
@@ -8,7 +8,7 @@ type PageProps = {
 
 const Page = ({ title, children }: PageProps) => (
   <Layout>
-    <Title title={title} />
+    <HeadTitle title={title} />
     {children}
   </Layout>
 );

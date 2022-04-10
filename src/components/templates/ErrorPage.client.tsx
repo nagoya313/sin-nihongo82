@@ -1,6 +1,6 @@
 import { Text } from '@chakra-ui/react';
-import Title from '../atoms/Title.client';
-import PageTitle from '../molecules/PageTitle.client';
+import HeadTitle from '../atoms/HeadTitle.client';
+import PageInfo from '../molecules/PageInfo.client';
 import Layout from '../organisms/Layout.client';
 
 type ErrorPageProps = {
@@ -11,8 +11,8 @@ type ErrorPageProps = {
 
 const ErrorPage = ({ errorType, title, text }: ErrorPageProps) => (
   <Layout>
-    <Title title={errorType} />
-    <PageTitle avatar={errorType} title={title} />
+    <HeadTitle title={errorType} />
+    <PageInfo avatar={errorType} title={title} />
     <Text mt={4}>{text}</Text>
   </Layout>
 );
