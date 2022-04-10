@@ -6,7 +6,6 @@ const nextConfig = {
     serverComponents: true,
     runtime: 'edge',
   },
-  swcMinify: true,
 };
 
 module.exports = nextConfig;
