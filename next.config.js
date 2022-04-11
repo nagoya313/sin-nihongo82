@@ -4,7 +4,7 @@ const nextConfig = {
   optimizeFonts: true,
   experimental: {
     serverComponents: true,
-    runtime: 'edge',
+    runtime: 'nodejs',
   },
 };
 
