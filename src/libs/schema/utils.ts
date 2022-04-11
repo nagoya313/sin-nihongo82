@@ -5,7 +5,6 @@ export type RemoveZodOptional<TZodType extends ZodTypeAny> = TZodType extends Zo
 
 export const direction = z.enum(['asc', 'desc']).default('asc');
 export const booleanRadio = z.enum(['none', 'true', 'false']).default('none');
-export const regexString = (regExp: RegExp, message: string) => z.string().regex(regExp, { message });
 export const intRange = (min: number, max: number) =>
   z
     .number()
