@@ -2,7 +2,7 @@ import { useControllableState } from '@chakra-ui/react';
 import { unstable_useRefreshRoot as useRefreshRoot } from 'next/streaming';
 import { useTransition } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
-import { z, ZodRawShape, type ZodObject } from 'zod';
+import { z, type ZodObject, type ZodRawShape } from 'zod';
 
 export const useSearch = <TSchema extends ZodObject<ZodRawShape>>(schema: TSchema) => {
   type Params = z.input<TSchema>;
@@ -15,6 +15,7 @@ export const useSearch = <TSchema extends ZodObject<ZodRawShape>>(schema: TSchem
       const next = schema.safeParse(params);
       if (next.success) {
         refresh(next.data);
+        console.log(next.data);
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         startSearchingTransition(() => {});
       }

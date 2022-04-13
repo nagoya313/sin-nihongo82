@@ -2,7 +2,7 @@ import { FormControl, FormErrorMessage, FormLabel, Icon, Tooltip } from '@chakra
 import { useState } from 'react';
 import { MdHelpOutline } from 'react-icons/md';
 import { type ZodNumber, type ZodString, type ZodTypeAny } from 'zod';
-import { type RemoveZodOptional, type ZodOptionalable } from '../../libs/schema/utils';
+import { type RemoveZodOptional, type ZodOptionalable } from '../../libs/schema/types';
 
 type ChangeValue<TZodType extends ZodTypeAny> = RemoveZodOptional<TZodType> extends ZodString
   ? string

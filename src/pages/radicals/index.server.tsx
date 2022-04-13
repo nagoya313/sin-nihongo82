@@ -1,17 +1,15 @@
-import { type NextRouter } from 'next/router';
+import { z } from 'zod';
 import RadicalIcon from '../../components/icons/RadicalIcon.client';
 import PageInfo from '../../components/molecules/PageInfo.client';
 import RadicalSearch from '../../components/organisms/RadicalSearch.client';
 import Page from '../../components/templates/Page.client';
 import { radicalQueryParams } from '../../features/radical/queryParams';
-import { getParams } from '../../libs/utils/router';
 
-type RadicalsProps = {
-  router: NextRouter;
-};
+type RadicalsProps = z.infer<typeof radicalQueryParams>;
 
-const Radicals = ({ router }: RadicalsProps) => {
-  const queryKey = radicalQueryParams.parse(getParams(router));
+const Radicals = ({ ...params }: RadicalsProps) => {
+  const queryKey = radicalQueryParams.parse(params);
+  console.log(queryKey);
 
   return (
     <Page title="部首索引">

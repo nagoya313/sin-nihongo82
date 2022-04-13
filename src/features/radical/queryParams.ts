@@ -13,3 +13,5 @@ export const radicalQueryParams = z.object({
     .max(10, '10文字以内で入力してください。')
     .optional(),
 });
+
+export default radicalQueryParams;
