@@ -1,4 +1,4 @@
-import { Box, Heading, HStack, Link, Text, useColorModeValue } from '@chakra-ui/react';
+import { Box, Heading, HStack, LinkBox, LinkOverlay, Text, useColorModeValue } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import CircleIcon from '../atoms/CircleIcon.client';
 
@@ -18,14 +18,16 @@ const NavCard = ({ avatar, title, description, href }: NavCardProps) => (
     bg={useColorModeValue('white', 'gray.700')}
     shadow={useColorModeValue('md', undefined)}
   >
-    <HStack>
-      <CircleIcon>{avatar}</CircleIcon>
+    <LinkBox as="article">
       <NextLink href={href} passHref>
-        <Link style={{ textDecoration: 'none' }}>
-          <Heading size="sm">{title}</Heading>
-        </Link>
+        <LinkOverlay>
+          <HStack>
+            <CircleIcon>{avatar}</CircleIcon>
+            <Heading size="sm">{title}</Heading>
+          </HStack>
+        </LinkOverlay>
       </NextLink>
-    </HStack>
+    </LinkBox>
     <Text mt={4}>{description}</Text>
   </Box>
 );
