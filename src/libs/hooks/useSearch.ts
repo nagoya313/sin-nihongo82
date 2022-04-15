@@ -4,20 +4,18 @@ import { useTransition } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { z, type ZodObject, type ZodRawShape } from 'zod';
 
-export const useSearch = <TSchema extends ZodObject<ZodRawShape>>(schema: TSchema) => {
+export const useSearch = <TSchema extends ZodObject<ZodRawShape>>(schema: TSchema, defaultValue: unknown = {}) => {
   type Params = z.input<TSchema>;
-  type Key = keyof Params;
   const refresh = useRefreshRoot();
   const [isSearching, startSearchingTransition] = useTransition();
   const [query, setQuery] = useControllableState<Params>({
-    defaultValue: schema.parse({}),
+    defaultValue: schema.parse(defaultValue),
     onChange: (params) => {
       const next = schema.safeParse(params);
       if (next.success) {
-        refresh(next.data);
-        console.log(next.data);
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
-        startSearchingTransition(() => {});
+        startSearchingTransition(() => {
+          refresh(next.data);
+        });
       }
     },
   });
@@ -26,7 +24,7 @@ export const useSearch = <TSchema extends ZodObject<ZodRawShape>>(schema: TSchem
   return {
     isSearching,
     query,
-    register: <TKey extends Key>(key: TKey, debounce?: boolean) =>
+    register: <TKey extends keyof Params>(key: TKey, debounce?: boolean) =>
       ({
         schema: schema.shape[key as keyof typeof schema.shape] as TSchema['shape'][TKey],
         onChange: debounce
