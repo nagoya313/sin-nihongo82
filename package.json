@@ -12,7 +12,8 @@
     "db:migrate": "yarn tsn src/db/migration.ts",
     "db:seed": "yarn tsn src/db/seed.ts",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "clean": "rm -rf .next"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^1.7.0",
@@ -22,7 +23,7 @@
     "framer-motion": "^6.2.8",
     "kysely": "^0.17.1",
     "lodash": "^4.17.21",
-    "next": "12.1.5",
+    "next": "12.1.6-canary.1",
     "pg": "^8.7.3",
     "react": "18.0.0",
     "react-dom": "18.0.0",
