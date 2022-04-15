@@ -1,14 +1,10 @@
-import { UserProvider } from '@auth0/nextjs-auth0';
-import { ChakraProvider } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
-import { global } from '../styles/global';
+import Providers from 'src/components/templates/Providers.client';
 
 const App = ({ Component, pageProps }: AppProps) => (
-  <UserProvider>
-    <ChakraProvider theme={global}>
-      <Component {...pageProps} />
-    </ChakraProvider>
-  </UserProvider>
+  <Providers>
+    <Component {...pageProps} />
+  </Providers>
 );
 
 export default App;
