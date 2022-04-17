@@ -1,4 +1,4 @@
-import { HStack, Tab, TabList, TabPanel, TabPanels, Tabs, VStack } from '@chakra-ui/react';
+import { HStack, Tab, TabList, TabPanels, Tabs, VStack } from '@chakra-ui/react';
 import SearchPanel from '../../components/molecules/SearchPanel.client';
 import { radicalQueryParams } from '../../features/radical/queryParams';
 import { useSearch } from '../../libs/hooks/useSearch';
@@ -6,7 +6,11 @@ import { getNumberRange } from '../../libs/schema/utils';
 import NumberInputField from '../molecules/NumberInputField.client';
 import StringInputField from '../molecules/StringInputField.client';
 
-const RadicalSearch = () => {
+type RadicalSearchProps = {
+  children: React.ReactNode;
+};
+
+const RadicalSearch = ({ children }: RadicalSearchProps) => {
   const { register } = useSearch(radicalQueryParams);
   const { min, max } = getNumberRange(radicalQueryParams.shape.strokeCount);
 
@@ -34,14 +38,7 @@ const RadicalSearch = () => {
           <Tab>画数順</Tab>
           <Tab>よみかた順</Tab>
         </TabList>
-        <TabPanels>
-          <TabPanel>
-            <p>画数順！</p>
-          </TabPanel>
-          <TabPanel>
-            <p>讀み方順！</p>
-          </TabPanel>
-        </TabPanels>
+        <TabPanels>{children}</TabPanels>
       </Tabs>
     </>
   );

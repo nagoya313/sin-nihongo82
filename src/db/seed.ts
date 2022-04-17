@@ -1,4 +1,4 @@
-import { connectDatabase } from './connection';
+import { connectDatabase } from './connection.server';
 import './env';
 import { radicalSeed } from './seeds/radical';
 

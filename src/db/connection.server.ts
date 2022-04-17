@@ -5,9 +5,7 @@ export const connectDatabase = () => {
   console.log('db connection');
 
   const db = new Kysely<Database>({
-    dialect: new PostgresDialect({
-      connectionString: process.env['DATABASE_URL'],
-    }),
+    dialect: new PostgresDialect({ connectionString: process.env['DATABASE_URL'] }),
     log(event) {
       switch (event.level) {
         case 'query': {

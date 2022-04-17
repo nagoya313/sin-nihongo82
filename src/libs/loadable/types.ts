@@ -1,3 +1,17 @@
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type LoadableLoaders = Record<string, (params: any) => Promise<any>>;
+
+export type LoadableCache<TLoadableLoaders extends LoadableLoaders> = {
+  [key in keyof TLoadableLoaders]?: Record<string, LoadableState<Awaited<ReturnType<TLoadableLoaders[key]>>>>;
+};
+
+export type LoadableParams<
+  TLoadableLoaders extends LoadableLoaders,
+  TQueryKey extends keyof TLoadableLoaders
+> = Parameters<TLoadableLoaders[TQueryKey]>[0] extends undefined
+  ? [TQueryKey]
+  : [TQueryKey, Parameters<TLoadableLoaders[TQueryKey]>[0]];
+
 export type LoadablePending<T> = {
   status: 'pending';
   promise: Promise<T>;
@@ -16,5 +30,3 @@ export type LoadableRejected = {
 };
 
 export type LoadableState<T> = LoadablePending<T> | LoadableSucceeded<T> | LoadableRejected;
-export type LoadableCache = Record<string, LoadableState<unknown>>;
-export type LoadableQueryKey = string | readonly [string, string | number | Record<string, unknown>];

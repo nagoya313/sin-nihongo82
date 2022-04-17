@@ -1,5 +1,5 @@
 import { FileMigrationProvider, Migrator } from 'kysely';
-import { connectDatabase } from './connection';
+import { connectDatabase } from './connection.server';
 import './env';
 
 (async () => {
