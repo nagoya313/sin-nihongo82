@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app';
-import Providers from 'src/components/templates/Providers.client';
+import Providers from '../components/templates/Providers.client';
 
 const App = ({ Component, pageProps }: AppProps) => (
   <Providers>
