@@ -1,1 +1,1 @@
-export const escapeLike = (value: string) => value.replaceAll(/[%_/]/g, '\\$&');
+export const escapeLike = (value: string) => value.replace(/[%_/]/g, '\\$&');

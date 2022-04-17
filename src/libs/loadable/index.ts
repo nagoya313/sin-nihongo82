@@ -13,7 +13,8 @@ export const makeLoadable = <TLoadableLoaders extends LoadableLoaders>(loaders: 
     constructor(...args: LoadableParams<TLoadableLoaders, TQueryKey>) {
       super();
       this.#key = args[0];
-      this.#params = JSON.stringify(args[1]);
+      this.#params = args[1];
+      this.#paramsKey = JSON.stringify(args[1]);
       this.#getOrSetCache();
     }
 
@@ -37,7 +38,7 @@ export const makeLoadable = <TLoadableLoaders extends LoadableLoaders>(loaders: 
     }
 
     get #cacheValue() {
-      return LoadableImpl.#cache[this.#key]?.[this.#params];
+      return LoadableImpl.#cache[this.#key]?.[this.#paramsKey];
     }
 
     #getOrSetCache() {
@@ -47,7 +48,7 @@ export const makeLoadable = <TLoadableLoaders extends LoadableLoaders>(loaders: 
         this.#chacheWrite({
           status: 'pending',
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          promise: LoadableImpl.#loaders[this.#key]!(this.#params).then(this.#succeeded).catch(this.#rejected),
+          promise: LoadableImpl.loaders[this.#key]!(this.#params).then(this.#succeeded).catch(this.#rejected),
         });
 
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -68,11 +69,11 @@ export const makeLoadable = <TLoadableLoaders extends LoadableLoaders>(loaders: 
     };
 
     #chacheWrite = (state: LoadableState<Awaited<ReturnType<TLoadableLoaders[TQueryKey]>>>) => {
-      Object.assign(LoadableImpl.#cache, { [this.#key]: { [this.#params]: state } });
+      Object.assign(LoadableImpl.#cache, { [this.#key]: { [this.#paramsKey]: state } });
     };
 
     #chacheDelte = () => {
-      delete LoadableImpl.#cache[this.#key]?.[this.#params];
+      delete LoadableImpl.#cache[this.#key]?.[this.#paramsKey];
       if (isEmpty(LoadableImpl.#cache[this.#key])) {
         delete LoadableImpl.#cache[this.#key];
       }
@@ -93,9 +94,10 @@ export const makeLoadable = <TLoadableLoaders extends LoadableLoaders>(loaders: 
     };
 
     readonly #key: TQueryKey;
-    readonly #params: string;
-    static #cache: LoadableCache<TLoadableLoaders> = {};
-    static #loaders = loaders;
+    readonly #params: LoadableParams<TLoadableLoaders, TQueryKey>[1];
+    readonly #paramsKey: string;
+    static readonly #cache: LoadableCache<TLoadableLoaders> = {};
+    static readonly loaders = loaders;
   }
 
   return LoadableImpl;
