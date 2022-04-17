@@ -1,8 +1,9 @@
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type LoadableLoaders = Record<string, (params: any) => Promise<any>>;
+export type LoadableData<TFn extends LoadableLoaders[keyof LoadableLoaders]> = Awaited<ReturnType<TFn>>;
 
 export type LoadableCache<TLoadableLoaders extends LoadableLoaders> = {
-  [key in keyof TLoadableLoaders]?: Record<string, LoadableState<Awaited<ReturnType<TLoadableLoaders[key]>>>>;
+  [key in keyof TLoadableLoaders]?: Record<string, LoadableState<LoadableData<TLoadableLoaders[key]>>>;
 };
 
 export type LoadableParams<

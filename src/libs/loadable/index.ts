@@ -1,5 +1,5 @@
 import isEmpty from 'lodash/isEmpty';
-import { LoadableCache, LoadableLoaders, LoadableParams, LoadableState } from './types';
+import { LoadableCache, LoadableData, LoadableLoaders, LoadableParams, LoadableState } from './types';
 
 export abstract class Loadable<TData> {
   abstract get value(): TData;
@@ -8,7 +8,7 @@ export abstract class Loadable<TData> {
 
 export const makeLoadable = <TLoadableLoaders extends LoadableLoaders>(loaders: TLoadableLoaders) => {
   class LoadableImpl<TQueryKey extends keyof TLoadableLoaders> extends Loadable<
-    Awaited<ReturnType<TLoadableLoaders[TQueryKey]>>
+    LoadableData<TLoadableLoaders[TQueryKey]>
   > {
     constructor(...args: LoadableParams<TLoadableLoaders, TQueryKey>) {
       super();
