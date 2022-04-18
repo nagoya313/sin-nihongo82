@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import { z } from 'zod';
 import RadicalIcon from '../../components/icons/RadicalIcon.client';
 import PageInfo from '../../components/molecules/PageInfo.client';
+import ResultSkelton from '../../components/molecules/ResultSkelton.client';
 import RadicalReadOrder from '../../components/organisms/RadicalReadOrder.server';
 import RadicalSearch from '../../components/organisms/RadicalSearch.client';
 import RadicalStrokeCountOrder from '../../components/organisms/RadicalStrokeCountOrder.server';
@@ -19,7 +20,7 @@ const Radicals = ({ sort = 'stroke_count', ...params }: RadicalsProps) => {
     <Page title="部首索引">
       <PageInfo avatar={<RadicalIcon />} title="部首索引" />
       <RadicalSearch>
-        <Suspense fallback={null}>
+        <Suspense fallback={<ResultSkelton />}>
           {sort === 'stroke_count' && (
             <RadicalStrokeCountOrder loadable={new Loadable('radicalStrokeCountOrder', queryParams)} />
           )}

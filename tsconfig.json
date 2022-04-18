@@ -22,7 +22,7 @@
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": "./",
-    "types": ["vitest/globals", "react/next"]
+    "types": ["vitest/globals"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
