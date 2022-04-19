@@ -2,6 +2,7 @@ import { HStack, Tab, TabList, TabPanel, TabPanels, Tabs, VStack } from '@chakra
 import { radicalKanjiQueryParams } from '../../features/kanji/queryParams';
 import { useSearch } from '../../libs/hooks/useSearch';
 import { getNumberRange } from '../../libs/schema/utils';
+import OrderButton from '../atoms/OrderButton.client';
 import NumberInputField from '../molecules/NumberInputField.client';
 import RadioFieldset from '../molecules/RadioFieldset.client';
 import SearchPanel from '../molecules/SearchPanel.client';
@@ -38,6 +39,7 @@ const RadicalKanjiSearch = ({ strokeCountOrder, readOrder }: RadicalSearchProps)
         <TabList>
           <Tab>画数順</Tab>
           <Tab>よみかた順</Tab>
+          <OrderButton {...register('direction')} />
         </TabList>
         <TabPanels>
           <TabPanel>{strokeCountOrder}</TabPanel>

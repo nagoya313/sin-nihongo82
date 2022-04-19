@@ -3,6 +3,7 @@ import SearchPanel from '../../components/molecules/SearchPanel.client';
 import { radicalQueryParams } from '../../features/radical/queryParams';
 import { useSearch } from '../../libs/hooks/useSearch';
 import { getNumberRange } from '../../libs/schema/utils';
+import OrderButton from '../atoms/OrderButton.client';
 import NumberInputField from '../molecules/NumberInputField.client';
 import StringInputField from '../molecules/StringInputField.client';
 
@@ -34,6 +35,7 @@ const RadicalSearch = ({ strokeCountOrder, readOrder }: RadicalSearchProps) => {
         <TabList>
           <Tab>画数順</Tab>
           <Tab>よみかた順</Tab>
+          <OrderButton {...register('direction')} />
         </TabList>
         <TabPanels>
           <TabPanel>{strokeCountOrder}</TabPanel>
