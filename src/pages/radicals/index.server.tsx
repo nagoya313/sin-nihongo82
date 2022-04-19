@@ -13,7 +13,7 @@ import { radicalQueryParams } from '../../features/radical/queryParams';
 
 type RadicalsProps = z.infer<typeof radicalQueryParams>;
 
-const Radicals = ({ sort = 'stroke_count', ...params }: RadicalsProps) => {
+const Radicals = ({ ...params }: RadicalsProps) => {
   const queryParams = radicalQueryParams.parse(params);
 
   return (
@@ -21,10 +21,10 @@ const Radicals = ({ sort = 'stroke_count', ...params }: RadicalsProps) => {
       <PageInfo avatar={<RadicalIcon />} title="部首索引" />
       <RadicalSearch>
         <Suspense fallback={<ResultSkelton />}>
-          {sort === 'stroke_count' && (
+          {queryParams.sort === 'stroke_count' && (
             <RadicalStrokeCountOrder loadable={new Loadable('radicalStrokeCountOrder', queryParams)} />
           )}
-          {sort === 'read' && <RadicalReadOrder loadable={new Loadable('radicalReadOrder', queryParams)} />}
+          {queryParams.sort === 'read' && <RadicalReadOrder loadable={new Loadable('radicalReadOrder', queryParams)} />}
         </Suspense>
       </RadicalSearch>
     </Page>
