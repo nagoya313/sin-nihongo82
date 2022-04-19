@@ -16,7 +16,7 @@ type RadicalSearchProps = {
 };
 
 const RadicalKanjiSearch = ({ strokeCountOrder, readOrder }: RadicalSearchProps) => {
-  const { register } = useSearch(radicalKanjiQueryParams);
+  const { register, isInvalid } = useSearch(radicalKanjiQueryParams);
   const { min, max } = getNumberRange(radicalKanjiQueryParams.shape.strokeCount);
 
   return (
@@ -27,10 +27,10 @@ const RadicalKanjiSearch = ({ strokeCountOrder, readOrder }: RadicalSearchProps)
             <StringInputField
               label="よみかた"
               help="漢字のよみかたは新日本語表音式によるひらがな（訓読み）、カタカナ（音読み）での前方一致で絞り込みができます。"
-              {...register('read', true)}
+              {...register('read')}
               placeholder="いち、ショー、つずみ"
             />
-            <NumberInputField label="部首内画数" {...register('strokeCount', true)} placeholder={`${min}〜${max}`} />
+            <NumberInputField label="部首内画数" {...register('strokeCount')} placeholder={`${min}〜${max}`} />
             <RadioFieldset label="常用漢字" {...register('regular')} radioLabels={reglurLabel} />
           </HStack>
         </VStack>
@@ -39,7 +39,7 @@ const RadicalKanjiSearch = ({ strokeCountOrder, readOrder }: RadicalSearchProps)
         <TabList>
           <Tab>画数順</Tab>
           <Tab>よみかた順</Tab>
-          <OrderButton {...register('direction')} />
+          <OrderButton {...register('direction')} disabled={isInvalid} />
         </TabList>
         <TabPanels>
           <TabPanel>{strokeCountOrder}</TabPanel>

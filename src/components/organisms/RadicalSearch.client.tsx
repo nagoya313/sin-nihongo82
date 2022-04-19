@@ -13,7 +13,7 @@ type RadicalSearchProps = {
 };
 
 const RadicalSearch = ({ strokeCountOrder, readOrder }: RadicalSearchProps) => {
-  const { register } = useSearch(radicalQueryParams);
+  const { register, isInvalid } = useSearch(radicalQueryParams);
   const { min, max } = getNumberRange(radicalQueryParams.shape.strokeCount);
 
   return (
@@ -24,10 +24,10 @@ const RadicalSearch = ({ strokeCountOrder, readOrder }: RadicalSearchProps) => {
             <StringInputField
               label="よみかた"
               help="部首名は新日本語表音式によるひらがなでの前方一致で絞り込みができます。"
-              {...register('read', true)}
+              {...register('read')}
               placeholder="いち、しょー、つずみ"
             />
-            <NumberInputField label="画数" {...register('strokeCount', true)} placeholder={`${min}〜${max}`} />
+            <NumberInputField label="画数" {...register('strokeCount')} placeholder={`${min}〜${max}`} />
           </HStack>
         </VStack>
       </SearchPanel>
@@ -35,7 +35,7 @@ const RadicalSearch = ({ strokeCountOrder, readOrder }: RadicalSearchProps) => {
         <TabList>
           <Tab>画数順</Tab>
           <Tab>よみかた順</Tab>
-          <OrderButton {...register('direction')} />
+          <OrderButton {...register('direction')} disabled={isInvalid} />
         </TabList>
         <TabPanels>
           <TabPanel>{strokeCountOrder}</TabPanel>

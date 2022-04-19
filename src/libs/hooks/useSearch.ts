@@ -1,36 +1,40 @@
 import { useControllableState } from '@chakra-ui/react';
 import { unstable_useRefreshRoot as useRefreshRoot } from 'next/streaming';
-import React from 'react';
+import React, { useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { z, type ZodObject, type ZodRawShape } from 'zod';
+
+const emptyError = {} as Record<string, ReadonlyArray<string>>;
 
 export const useSearch = <TSchema extends ZodObject<ZodRawShape>>(schema: TSchema, defaultValue: unknown = {}) => {
   type Params = z.input<TSchema>;
   const refresh = useRefreshRoot();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [isSearching, startSearchingTransition] = (React as any).useTransition();
+  const [isSearching, startTransition] = (React as any).useTransition();
+  const [errors, setErrors] = useState(emptyError);
+  const setDebounceQuery = useDebouncedCallback((params: Params) => startTransition(() => refresh(params)), 200);
   const [query, setQuery] = useControllableState<Params>({
     defaultValue: schema.parse(defaultValue),
     onChange: (params) => {
       const next = schema.safeParse(params);
       if (next.success) {
-        startSearchingTransition(() => {
-          refresh(next.data);
-        });
+        setErrors(emptyError);
+        setDebounceQuery(next.data);
+      } else {
+        setErrors(next.error.flatten().fieldErrors);
       }
     },
   });
-  const setDebounceQuery = useDebouncedCallback(setQuery, 1000);
 
   return {
     isSearching,
     query,
-    register: <TKey extends keyof Params>(key: TKey, debounce?: boolean) =>
+    isInvalid: errors !== emptyError,
+    register: <TKey extends Extract<keyof Params, string>>(key: TKey) =>
       ({
-        schema: schema.shape[key as keyof typeof schema.shape] as TSchema['shape'][TKey],
-        onChange: debounce
-          ? (next: Params[TKey] | undefined) => setDebounceQuery((prev) => ({ ...prev, [key]: next }))
-          : (next: Params[TKey] | undefined) => setQuery((prev) => ({ ...prev, [key]: next })),
+        errors: errors[key],
+        schema: schema.shape[key] as TSchema['shape'][TKey],
+        onChange: (next: Params[TKey] | undefined) => setQuery((prev) => ({ ...prev, [key]: next })),
       } as const),
   };
 };

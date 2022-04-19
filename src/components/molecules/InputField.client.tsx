@@ -1,5 +1,4 @@
 import { FormControl, FormErrorMessage, FormLabel, Icon, Tooltip } from '@chakra-ui/react';
-import { useState } from 'react';
 import { MdHelpOutline } from 'react-icons/md';
 import { type ZodNumber, type ZodString, type ZodTypeAny } from 'zod';
 import { type RemoveZodOptional, type ZodOptionalable } from '../../libs/schema/types';
@@ -15,7 +14,7 @@ export type InputFieldPropsBase<TSchema extends InputFieldSchema> = {
   label?: string;
   help?: string;
   onChange: (value: ChangeValue<TSchema> | undefined) => void;
-  schema: TSchema;
+  errors?: ReadonlyArray<string>;
 };
 
 type InputFieldProps<TSchema extends InputFieldSchema> = {
@@ -26,38 +25,25 @@ const InputField = <TSchema extends InputFieldSchema>({
   label,
   help,
   onChange,
-  schema,
+  errors,
   children,
-}: InputFieldProps<TSchema>) => {
-  const [error, setError] = useState<string>();
-  const handleChange = (value: ChangeValue<TSchema> | undefined) => {
-    const parsed = schema.safeParse(value);
-    if (parsed.success) {
-      onChange(value);
-      setError(undefined);
-    } else {
-      setError(parsed.error.errors[0]?.message);
-    }
-  };
-
-  return (
-    <FormControl isInvalid={error != null}>
-      {label && (
-        <FormLabel>
-          {label}
-          {help && (
-            <Tooltip label={help}>
-              <span>
-                <Icon as={MdHelpOutline} />
-              </span>
-            </Tooltip>
-          )}
-        </FormLabel>
-      )}
-      {children(handleChange)}
-      <FormErrorMessage>{error != null && error}</FormErrorMessage>
-    </FormControl>
-  );
-};
+}: InputFieldProps<TSchema>) => (
+  <FormControl isInvalid={errors != null}>
+    {label && (
+      <FormLabel>
+        {label}
+        {help && (
+          <Tooltip label={help}>
+            <span>
+              <Icon as={MdHelpOutline} />
+            </span>
+          </Tooltip>
+        )}
+      </FormLabel>
+    )}
+    {children(onChange)}
+    <FormErrorMessage>{errors != null && errors[0]}</FormErrorMessage>
+  </FormControl>
+);
 
 export default InputField;
