@@ -5,10 +5,12 @@ import PageInfo from '../../components/molecules/PageInfo.client';
 import Page from '../../components/templates/Page.client';
 import { radicalQueryParams } from '../../features/radical/queryParams';
 
-type RadicalsProps = z.infer<typeof radicalQueryParams>;
+type RadicalsProps = z.infer<typeof radicalQueryParams> & {
+  radicalId: number;
+};
 
-const Radical = ({ ...params }: RadicalsProps) => {
-  const queryKey = radicalQueryParams.parse(params);
+const Radical = ({ radicalId }: RadicalsProps) => {
+  console.log(radicalId);
 
   return (
     <Page title="部首索引">
