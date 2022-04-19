@@ -1,6 +1,6 @@
 import { Box, Wrap } from '@chakra-ui/react';
 import groupBy from 'lodash/groupBy';
-import { useRef } from 'react';
+import { Fragment, useRef } from 'react';
 import { GroupedVirtuoso, type GroupedVirtuosoHandle } from 'react-virtuoso';
 import { type LoadableData } from '../../features/loadable';
 import { Path } from '../../features/path';
@@ -29,14 +29,14 @@ const ReadOrder = ({ data }: ReadOrderProps) => {
           itemContent={(index) => (
             <Wrap p={4}>
               {Object.entries(groupBy(data[index]?.results, 'read')).map(([name, codePoints]) => (
-                <>
+                <Fragment key={name}>
                   {codePoints.map(({ code_point }, index) => (
-                    <>
+                    <Fragment key={`${name}-${code_point}`}>
                       {index === 0 && <ReadBadge name={name} />}
-                      <WordItem key={`word-${code_point}`} codePoint={code_point} path={Path.radical} />
-                    </>
+                      <WordItem codePoint={code_point} path={Path.radical} />
+                    </Fragment>
                   ))}
-                </>
+                </Fragment>
               ))}
             </Wrap>
           )}

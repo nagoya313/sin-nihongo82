@@ -33,7 +33,7 @@ const StrokeCountOrder = ({ data }: StrokeCountOrderProps) => {
               {
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 data[index]!.code_points.map((codePoint) => (
-                  <WordItem key={`word-${codePoint}`} codePoint={codePoint} path={Path.radical} />
+                  <WordItem key={codePoint} codePoint={codePoint} path={Path.radical} />
                 ))
               }
             </Wrap>
