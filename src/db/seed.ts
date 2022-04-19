@@ -1,5 +1,6 @@
 import { connectDatabase } from './connection.server';
 import './env';
+import { kanjiSeed } from './seeds/kanji';
 import { radicalSeed } from './seeds/radical';
 
 (async () => {
@@ -7,6 +8,7 @@ import { radicalSeed } from './seeds/radical';
 
   try {
     await radicalSeed(db);
+    await kanjiSeed(db);
   } catch (error) {
     console.error(error);
   }

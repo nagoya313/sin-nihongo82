@@ -9,6 +9,7 @@ export const intRange = (min: number, max: number) =>
     .min(min, { message: `${min}以上で入力してください。` })
     .max(max, { message: `${max}以下で入力してください。` })
     .int({ message: '整数で入力してください。' });
+export const smallInt = z.preprocess((value) => Number(value), z.number().int().min(-32768).max(32767));
 
 export const getNumberRange = (schema: ZodOptionalable<ZodNumber>) => {
   const number = schema instanceof z.ZodOptional ? schema.unwrap() : schema;
