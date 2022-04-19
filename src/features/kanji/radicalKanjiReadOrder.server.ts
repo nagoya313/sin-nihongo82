@@ -1,6 +1,7 @@
 import { sql } from 'kysely';
 import { db } from '../../db/db.server';
 import { escapeLike } from '../../libs/utils/sqlEscape';
+import { kanaTranslate } from '../../libs/utils/sqlFunction';
 import { type RadicalKanjiQueryParams } from './types';
 
 type QueryParams = Omit<RadicalKanjiQueryParams, 'sort'> & { radicalId: number };
@@ -11,13 +12,7 @@ export const radicalKanjiReadOrder = ({ strokeCount, regular, read, radicalId, d
     .selectFrom((db) =>
       db
         .selectFrom('kanji')
-        .select([
-          sql<string>`translate(left(read, 1), 'ァアィイゥウェエォオカガキギクグケゲコゴサザシジスズセゼソゾタダチッツテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモャヤュユョヨラリルレロヮワン', 'ぁあぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちっつてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろゎわん')`.as(
-            'read_front'
-          ),
-          'read',
-          'code_point',
-        ])
+        .select([kanaTranslate.as('read_front'), 'read', 'code_point'])
         .innerJoin('kanji_read', 'code_point', 'kanji_read.kanji_code_point')
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         .if(strokeCount != null, (qb) => qb.where('in_radical_stroke_count', '=', strokeCount!))
