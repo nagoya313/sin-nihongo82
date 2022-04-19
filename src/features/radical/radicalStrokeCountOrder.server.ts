@@ -6,7 +6,10 @@ import { type RadicalQueryParams } from './types';
 export const radicalStrokeCountOrder = ({ direction, strokeCount, read }: Omit<RadicalQueryParams, 'sort'>) =>
   db
     .selectFrom('radical')
-    .select(['stroke_count', sql<ReadonlyArray<number>>`array_agg(code_point order by code_point)`.as('code_points')])
+    .select([
+      'stroke_count',
+      sql<ReadonlyArray<number>>`array_agg(distinct code_point order by code_point)`.as('code_points'),
+    ])
     .if(!!read, (qb) =>
       qb
         .innerJoin('radical_read', 'radical.code_point', 'radical_read.radical_code_point')
