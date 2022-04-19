@@ -1,10 +1,10 @@
 import { type GetServerSideProps } from 'next';
 import { Suspense } from 'react';
-import RadicalKanjiReadOrder from 'src/components/organisms/RadicalKanjiReadOrder.server';
 import { z } from 'zod';
 import PageInfo from '../../components/molecules/PageInfo.client';
 import RadicalDefine from '../../components/molecules/RadicalDefine.client';
 import ResultSkelton from '../../components/molecules/ResultSkelton.client';
+import RadicalKanjiReadOrder from '../../components/organisms/RadicalKanjiReadOrder.server';
 import RadicalKanjiSearch from '../../components/organisms/RadicalKanjiSearch.client';
 import RadicalKanjiStrokeCountOrder from '../../components/organisms/RadicalKanjiStrokeCountOrder.server';
 import Page from '../../components/templates/Page.client';
@@ -28,20 +28,22 @@ const Radical = ({ radical, ...params }: RadicalsProps) => {
         subText={`（現在は旧日本語字形で部首が「${radical.radical}」の漢字が登録されていますが、新日本語字形で部首が「${radical.radical}」のものに置換予定です。）`}
       />
       <RadicalDefine radical={radical} />
-      <RadicalKanjiSearch>
-        <Suspense fallback={<ResultSkelton />}>
-          {queryParams.sort === 'stroke_count' && (
+      <RadicalKanjiSearch
+        strokeCountOrder={
+          <Suspense fallback={<ResultSkelton />}>
             <RadicalKanjiStrokeCountOrder
               loadable={new Loadable('radicalKanjiStrokeCountOrder', { ...queryParams, radicalId: radical.code_point })}
             />
-          )}
-          {queryParams.sort === 'read' && (
+          </Suspense>
+        }
+        readOrder={
+          <Suspense fallback={<ResultSkelton />}>
             <RadicalKanjiReadOrder
               loadable={new Loadable('radicalKanjiReadOrder', { ...queryParams, radicalId: radical.code_point })}
             />
-          )}
-        </Suspense>
-      </RadicalKanjiSearch>
+          </Suspense>
+        }
+      />
     </Page>
   );
 };

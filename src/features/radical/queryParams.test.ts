@@ -4,10 +4,6 @@ describe('radicalQueryParams', () => {
   describe('default values', () => {
     const params = radicalQueryParams.parse({});
 
-    it('sort equal stroke_count', () => {
-      expect(params.sort).toBe('stroke_count');
-    });
-
     it('direction equal asc', () => {
       expect(params.direction).toBe('asc');
     });
@@ -24,13 +20,6 @@ describe('radicalQueryParams', () => {
   describe('validation', () => {
     it('{} is parse success', () => {
       expect(radicalQueryParams).toAcceptValue({});
-    });
-
-    describe('sort', () => {
-      it('stroke_count or read only accept', () => {
-        expect(radicalQueryParams).toAcceptPropertyValues('sort', ['stroke_count', 'read']);
-        expect(radicalQueryParams).not.toAcceptPropertyValue('sort', 'abc');
-      });
     });
 
     describe('direction', () => {

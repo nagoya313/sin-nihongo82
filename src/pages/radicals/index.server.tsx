@@ -19,14 +19,18 @@ const Radicals = ({ ...params }: RadicalsProps) => {
   return (
     <Page title="部首索引">
       <PageInfo avatar={<RadicalIcon />} title="部首索引" />
-      <RadicalSearch>
-        <Suspense fallback={<ResultSkelton />}>
-          {queryParams.sort === 'stroke_count' && (
+      <RadicalSearch
+        strokeCountOrder={
+          <Suspense fallback={<ResultSkelton />}>
             <RadicalStrokeCountOrder loadable={new Loadable('radicalStrokeCountOrder', queryParams)} />
-          )}
-          {queryParams.sort === 'read' && <RadicalReadOrder loadable={new Loadable('radicalReadOrder', queryParams)} />}
-        </Suspense>
-      </RadicalSearch>
+          </Suspense>
+        }
+        readOrder={
+          <Suspense fallback={<ResultSkelton />}>
+            <RadicalReadOrder loadable={new Loadable('radicalReadOrder', queryParams)} />
+          </Suspense>
+        }
+      />
     </Page>
   );
 };

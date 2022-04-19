@@ -1,4 +1,4 @@
-import { HStack, Tab, TabList, TabPanels, Tabs, VStack } from '@chakra-ui/react';
+import { HStack, Tab, TabList, TabPanel, TabPanels, Tabs, VStack } from '@chakra-ui/react';
 import SearchPanel from '../../components/molecules/SearchPanel.client';
 import { radicalQueryParams } from '../../features/radical/queryParams';
 import { useSearch } from '../../libs/hooks/useSearch';
@@ -7,10 +7,11 @@ import NumberInputField from '../molecules/NumberInputField.client';
 import StringInputField from '../molecules/StringInputField.client';
 
 type RadicalSearchProps = {
-  children: React.ReactNode;
+  strokeCountOrder: React.ReactNode;
+  readOrder: React.ReactNode;
 };
 
-const RadicalSearch = ({ children }: RadicalSearchProps) => {
+const RadicalSearch = ({ strokeCountOrder, readOrder }: RadicalSearchProps) => {
   const { register } = useSearch(radicalQueryParams);
   const { min, max } = getNumberRange(radicalQueryParams.shape.strokeCount);
 
@@ -29,16 +30,15 @@ const RadicalSearch = ({ children }: RadicalSearchProps) => {
           </HStack>
         </VStack>
       </SearchPanel>
-      <Tabs
-        mt={4}
-        colorScheme="purple"
-        onChange={(index) => register('sort').onChange(index === 0 ? 'stroke_count' : 'read')}
-      >
+      <Tabs mt={4} colorScheme="purple">
         <TabList>
           <Tab>画数順</Tab>
           <Tab>よみかた順</Tab>
         </TabList>
-        <TabPanels>{children}</TabPanels>
+        <TabPanels>
+          <TabPanel>{strokeCountOrder}</TabPanel>
+          <TabPanel>{readOrder}</TabPanel>
+        </TabPanels>
       </Tabs>
     </>
   );

@@ -1,4 +1,4 @@
-import { HStack, Tab, TabList, TabPanels, Tabs, VStack } from '@chakra-ui/react';
+import { HStack, Tab, TabList, TabPanel, TabPanels, Tabs, VStack } from '@chakra-ui/react';
 import { radicalKanjiQueryParams } from '../../features/kanji/queryParams';
 import { useSearch } from '../../libs/hooks/useSearch';
 import { getNumberRange } from '../../libs/schema/utils';
@@ -10,10 +10,11 @@ import StringInputField from '../molecules/StringInputField.client';
 const reglurLabel = { none: '指定なし', true: '常用', false: '常用外' } as const;
 
 type RadicalSearchProps = {
-  children: React.ReactNode;
+  strokeCountOrder: React.ReactNode;
+  readOrder: React.ReactNode;
 };
 
-const RadicalKanjiSearch = ({ children }: RadicalSearchProps) => {
+const RadicalKanjiSearch = ({ strokeCountOrder, readOrder }: RadicalSearchProps) => {
   const { register } = useSearch(radicalKanjiQueryParams);
   const { min, max } = getNumberRange(radicalKanjiQueryParams.shape.strokeCount);
 
@@ -33,16 +34,15 @@ const RadicalKanjiSearch = ({ children }: RadicalSearchProps) => {
           </HStack>
         </VStack>
       </SearchPanel>
-      <Tabs
-        mt={4}
-        colorScheme="purple"
-        onChange={(index) => register('sort').onChange(index === 0 ? 'stroke_count' : 'read')}
-      >
+      <Tabs mt={4} colorScheme="purple">
         <TabList>
           <Tab>画数順</Tab>
           <Tab>よみかた順</Tab>
         </TabList>
-        <TabPanels>{children}</TabPanels>
+        <TabPanels>
+          <TabPanel>{strokeCountOrder}</TabPanel>
+          <TabPanel>{readOrder}</TabPanel>
+        </TabPanels>
       </Tabs>
     </>
   );
