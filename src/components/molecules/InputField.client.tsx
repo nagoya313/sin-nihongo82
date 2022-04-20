@@ -1,33 +1,26 @@
 import { FormControl, FormErrorMessage, FormLabel, Icon, Tooltip } from '@chakra-ui/react';
 import { MdHelpOutline } from 'react-icons/md';
-import { type ZodNumber, type ZodString, type ZodTypeAny } from 'zod';
-import { type RemoveZodOptional, type ZodOptionalable } from '../../libs/schema/types';
 
-type ChangeValue<TZodType extends ZodTypeAny> = RemoveZodOptional<TZodType> extends ZodString
-  ? string
-  : RemoveZodOptional<TZodType> extends ZodNumber
-  ? number
-  : never;
-type InputFieldSchema = ZodOptionalable<ZodString> | ZodOptionalable<ZodNumber>;
+type InputFieldValue = string | number;
 
-export type InputFieldPropsBase<TSchema extends InputFieldSchema> = {
+export type InputFieldPropsBase<TValue extends InputFieldValue> = {
   label?: string;
   help?: string;
-  onChange: (value: ChangeValue<TSchema> | undefined) => void;
+  onChange: (value: TValue | undefined) => void;
   errors?: ReadonlyArray<string>;
 };
 
-type InputFieldProps<TSchema extends InputFieldSchema> = {
-  children: (onChange: (value: ChangeValue<TSchema> | undefined) => void) => React.ReactNode;
-} & InputFieldPropsBase<TSchema>;
+type InputFieldProps<TValue extends InputFieldValue> = {
+  children: (onChange: (value: TValue | undefined) => void) => React.ReactNode;
+} & InputFieldPropsBase<TValue>;
 
-const InputField = <TSchema extends InputFieldSchema>({
+const InputField = <TValue extends InputFieldValue>({
   label,
   help,
   onChange,
   errors,
   children,
-}: InputFieldProps<TSchema>) => (
+}: InputFieldProps<TValue>) => (
   <FormControl isInvalid={errors != null}>
     {label && (
       <FormLabel>

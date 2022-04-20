@@ -1,13 +1,10 @@
 import { NumberInput, NumberInputField as CUINumberInputField } from '@chakra-ui/react';
-import { type ZodNumber, type ZodOptional } from 'zod';
 import { numberOnChange } from '../../libs/utils/input';
 import InputField, { type InputFieldPropsBase } from './InputField.client';
 
-type NumberSchema = ZodNumber | ZodOptional<ZodNumber>;
-
 type NumberInputFieldProps = {
   placeholder?: string;
-} & InputFieldPropsBase<NumberSchema>;
+} & InputFieldPropsBase<number>;
 
 const NumberInputField = ({ placeholder, ...others }: NumberInputFieldProps) => (
   <InputField {...others}>
