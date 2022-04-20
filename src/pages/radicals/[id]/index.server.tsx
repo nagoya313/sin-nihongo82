@@ -13,6 +13,7 @@ import { radicalKanjiQueryParams } from '../../../features/kanji/queryParams';
 import { Loadable } from '../../../features/loadable';
 import { radical } from '../../../features/radical/radicalQuery.server';
 import { smallInt } from '../../../libs/schema/postgres';
+import { numberPreprocess } from '../../../libs/schema/preprocess';
 
 type RadicalProps = z.infer<typeof radicalKanjiQueryParams> & {
   radical: NonNullable<Awaited<ReturnType<typeof radical>>>;
@@ -53,7 +54,7 @@ const Radical = ({ radical, ...params }: RadicalProps) => {
 export default Radical;
 
 export const getServerSideProps: GetServerSideProps<RadicalProps> = async (context) => {
-  const parsedId = z.object({ id: smallInt }).safeParse(context.query);
+  const parsedId = z.object({ id: numberPreprocess(smallInt) }).safeParse(context.query);
   if (parsedId.success) {
     const data = await radical(parsedId.data.id);
     if (data != null)

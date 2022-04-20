@@ -1,3 +1,3 @@
-import { z } from 'zod';
+import { intRange } from './intRange';
 
-export const smallInt = z.preprocess((value) => Number(value), z.number().int().min(-32768).max(32767));
+export const smallInt = intRange(-32768, 32767);

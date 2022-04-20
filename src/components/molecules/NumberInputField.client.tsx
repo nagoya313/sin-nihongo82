@@ -6,13 +6,16 @@ type NumberInputFieldProps = {
   placeholder?: string;
 } & InputFieldPropsBase<number>;
 
-const NumberInputField = ({ placeholder, ...others }: NumberInputFieldProps) => (
+const NumberInputField = ({ placeholder, defaultValue, onChange, ...others }: NumberInputFieldProps) => (
   <InputField {...others}>
-    {(handleChange) => (
-      <NumberInput focusBorderColor="purple.400" onChange={numberOnChange(handleChange)} clampValueOnBlur={false}>
-        <CUINumberInputField placeholder={placeholder} />
-      </NumberInput>
-    )}
+    <NumberInput
+      focusBorderColor="purple.400"
+      defaultValue={defaultValue}
+      onChange={numberOnChange(onChange)}
+      clampValueOnBlur={false}
+    >
+      <CUINumberInputField placeholder={placeholder} />
+    </NumberInput>
   </InputField>
 );
 

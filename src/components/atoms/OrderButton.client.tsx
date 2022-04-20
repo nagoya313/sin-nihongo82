@@ -1,6 +1,6 @@
 import { IconButton, useControllableState } from '@chakra-ui/react';
 import { MdExpandLess, MdExpandMore } from 'react-icons/md';
-import { direction } from '../../libs/schema/utils';
+import { direction } from '../../libs/schema/direction';
 
 type OrderButtonProps = {
   schema: typeof direction;

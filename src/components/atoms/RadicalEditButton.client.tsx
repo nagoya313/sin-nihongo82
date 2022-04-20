@@ -2,7 +2,7 @@ import { useUser } from '@auth0/nextjs-auth0';
 import { IconButton } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { MdEdit } from 'react-icons/md';
-import { Path } from 'src/features/path';
+import { Path } from '../../features/path';
 
 type RadicalEditButtonProps = {
   codePoint: number;

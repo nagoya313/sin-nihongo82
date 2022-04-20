@@ -6,11 +6,14 @@ type StringInputFieldProps = {
   placeholder?: string;
 } & InputFieldPropsBase<string>;
 
-const StringInputField = ({ placeholder, ...othres }: StringInputFieldProps) => (
+const StringInputField = ({ placeholder, defaultValue, onChange, ...othres }: StringInputFieldProps) => (
   <InputField {...othres}>
-    {(handleChange) => (
-      <Input focusBorderColor="purple.400" placeholder={placeholder} onChange={stringOnChange(handleChange)} />
-    )}
+    <Input
+      focusBorderColor="purple.400"
+      placeholder={placeholder}
+      defaultValue={defaultValue}
+      onChange={stringOnChange(onChange)}
+    />
   </InputField>
 );
 
