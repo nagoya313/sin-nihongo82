@@ -1,6 +1,6 @@
 # 新日本語
 
-この案件は [Next.js](https://nextjs.org/) と [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) にて生成。React Server Component のお試し版。[https://sin-nihongo82.vercel.app/](https://sin-nihongo82.vercel.app/)で試作稼働中。
+この案件は [Next.js](https://nextjs.org/) と [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) にて生成。React Server Component のお試し版。 [https://sin-nihongo82.vercel.app/] (https://sin-nihongo82.vercel.app/)で試作稼働中。
 
 ## ローカルでの開始方法
 
