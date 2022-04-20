@@ -12,7 +12,7 @@ import Page from '../../../components/templates/Page.client';
 import { radicalKanjiQueryParams } from '../../../features/kanji/queryParams';
 import { Loadable } from '../../../features/loadable';
 import { radical } from '../../../features/radical/radicalQuery.server';
-import { smallInt } from '../../../libs/schema/utils';
+import { smallInt } from '../../../libs/schema/postgres';
 
 type RadicalProps = z.infer<typeof radicalKanjiQueryParams> & {
   radical: NonNullable<Awaited<ReturnType<typeof radical>>>;

@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css}'",
-    "tsn": "ts-node -r tsconfig-paths/register -O '{\"module\": \"commonjs\"}'",
+    "tsn": "ts-node -r tsconfig-paths/register -O '{\"module\": \"commonjs\", \"baseUrl\": \"./\"}'",
     "db:migrate": "yarn tsn src/db/migration.ts",
     "db:seed": "yarn tsn src/db/seed.ts",
     "test": "vitest",

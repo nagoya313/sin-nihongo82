@@ -1,5 +1,7 @@
 import { z } from 'zod';
-import { booleanRadio, direction, intRange } from '../../libs/schema/utils';
+import { booleanRadio } from '../../libs/schema/booleanRadio';
+import { direction } from '../../libs/schema/direction';
+import { intRange } from '../../libs/schema/intRange';
 
 const KANA_MATCHER = /^(?!.*[ぢづゐゑをヂヅヰヱヲ])[\u3040-\u3093\u30a0-\u30ffー]+$/;
 

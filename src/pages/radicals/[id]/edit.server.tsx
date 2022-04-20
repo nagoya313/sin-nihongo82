@@ -4,7 +4,7 @@ import { z } from 'zod';
 import PageInfo from '../../../components/molecules/PageInfo.client';
 import Page from '../../../components/templates/Page.client';
 import { radical } from '../../../features/radical/radicalQuery.server';
-import { smallInt } from '../../../libs/schema/utils';
+import { smallInt } from '../../../libs/schema/postgres';
 
 type RadicalEditProps = {
   radical: NonNullable<Awaited<ReturnType<typeof radical>>>;

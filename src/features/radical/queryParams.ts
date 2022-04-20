@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { direction, intRange } from '../../libs/schema/utils';
+import { direction } from '../../libs/schema/direction';
+import { intRange } from '../../libs/schema/intRange';
 
 const KANA_MATCHER = /^(?!.*[ぢづゐゑを])[\u3040-\u3093ー]+$/;
 

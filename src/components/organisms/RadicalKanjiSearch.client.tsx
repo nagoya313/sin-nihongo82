@@ -1,7 +1,7 @@
 import { HStack, Tab, TabList, TabPanel, TabPanels, Tabs, VStack } from '@chakra-ui/react';
 import { radicalKanjiQueryParams } from '../../features/kanji/queryParams';
 import { useSearch } from '../../libs/hooks/useSearch';
-import { getNumberRange } from '../../libs/schema/utils';
+import { getNumberRange } from '../../libs/schema/intRange';
 import OrderButton from '../atoms/OrderButton.client';
 import NumberInputField from '../molecules/NumberInputField.client';
 import RadioFieldset from '../molecules/RadioFieldset.client';
