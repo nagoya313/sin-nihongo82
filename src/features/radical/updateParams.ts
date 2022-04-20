@@ -6,5 +6,5 @@ import { hiragana } from '../../libs/schema/regex';
 export const radicalUpdateParams = z.object({
   code_point: smallInt,
   stroke_count: intRange(1, 17),
-  reads: z.array(hiragana.max(10, '10文字以内で入力してください。')),
+  reads: z.array(hiragana.max(10)),
 });

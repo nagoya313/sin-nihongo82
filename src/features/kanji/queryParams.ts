@@ -8,10 +8,6 @@ const KANA_MATCHER = /^(?!.*[ぢづゐゑをヂヅヰヱヲ])[\u3040-\u3093\u30a
 export const radicalKanjiQueryParams = z.object({
   direction,
   strokeCount: intRange(-1, 25).optional(),
-  read: z
-    .string()
-    .regex(KANA_MATCHER, 'ひらがなかカタカナで入力してください。')
-    .max(10, '10文字以内で入力してください。')
-    .optional(),
+  read: z.string().regex(KANA_MATCHER, 'ひらがなかカタカナで入力してください。').max(10).optional(),
   regular: booleanRadio,
 });

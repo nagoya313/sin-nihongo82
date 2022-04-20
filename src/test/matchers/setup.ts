@@ -1,3 +1,9 @@
-import { toAcceptPropertyValue, toAcceptPropertyValues, toAcceptValue, toAcceptValues } from './zod';
+import {
+  toAcceptPropertyValue,
+  toAcceptPropertyValues,
+  toAcceptValue,
+  toAcceptValues,
+  toHaveInvalidMessage,
+} from './zod';
 
-expect.extend({ toAcceptValue, toAcceptValues, toAcceptPropertyValue, toAcceptPropertyValues });
+expect.extend({ toAcceptValue, toAcceptValues, toAcceptPropertyValue, toAcceptPropertyValues, toHaveInvalidMessage });

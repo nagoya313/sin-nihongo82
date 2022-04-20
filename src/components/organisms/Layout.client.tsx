@@ -13,6 +13,8 @@ import {
   useDisclosure,
   VStack,
 } from '@chakra-ui/react';
+import { setErrorMap } from 'zod';
+import { errorMap } from '../../libs/schema/errors/errorMap';
 import { HEADER_HEIGHT } from '../../styles/constants';
 import { global } from '../../styles/global';
 import SideBar from '../molecules/SideBar.client';
@@ -25,6 +27,7 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  setErrorMap((issue, ctx) => ({ message: errorMap(issue, ctx) }));
 
   return (
     <UserProvider>

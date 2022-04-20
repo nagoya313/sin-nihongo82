@@ -6,5 +6,5 @@ import { hiragana } from '../../libs/schema/regex';
 export const radicalQueryParams = z.object({
   direction,
   strokeCount: intRange(1, 17).optional(),
-  read: hiragana.max(10, '10文字以内で入力してください。').optional(),
+  read: hiragana.max(10).optional(),
 });

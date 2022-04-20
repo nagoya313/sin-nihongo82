@@ -53,3 +53,16 @@ export const toAcceptPropertyValues = (schema: ZodType, property: string, values
 
   return { pass, message };
 };
+
+export const toHaveInvalidMessage = (schema: ZodType, value: unknown, errorMessage: string) => {
+  assert(schema instanceof ZodType, 'schema is not zod schema.');
+  const parsed = schema.safeParse(value);
+  const pass =
+    !parsed.success && parsed.error.errors.some(({ path, message }) => isEqual(path, []) && message === errorMessage);
+
+  const message = pass
+    ? () => `expected not have messsage ${errorMessage}.`
+    : () => `expected have ivalid message ${errorMessage}.`;
+
+  return { pass, message };
+};
