@@ -1,8 +1,9 @@
-import { Button, VStack } from '@chakra-ui/react';
+import { VStack } from '@chakra-ui/react';
 import omit from 'lodash/omit';
 import { type radical } from '../../features/radical/radicalQuery.server';
 import { radicalUpdateParams } from '../../features/radical/updateParams';
 import Form from '../../libs/form/Form.client';
+import SubmitButton from '../atoms/SubmitButton.client';
 import NumberInputField from './NumberInputField.client';
 
 type RadicalEditFormProps = {
@@ -17,13 +18,11 @@ const RadicalEditForm = ({ radical }: RadicalEditFormProps) => (
       console.log(value);
     }}
   >
-    {({ control, formState }) => (
+    {({ control }) => (
       <VStack mt={4} align="start">
         <NumberInputField label="コードポイント" control={control} name="code_point" />
         <NumberInputField label="画数" control={control} name="stroke_count" />
-        <Button type="submit" isDisabled={!formState.isValid}>
-          更新する
-        </Button>
+        <SubmitButton control={control} text="更新する" />
       </VStack>
     )}
   </Form>
