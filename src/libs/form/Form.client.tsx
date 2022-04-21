@@ -1,36 +1,21 @@
-import { Provider } from 'jotai';
-import { useRef } from 'react';
-import { type ZodObject, type ZodRawShape } from 'zod';
-import { defaultAtoms, defaultErrors, errorsAtom, valuesAtom } from './atoms';
-import { FormImpl } from './FormImpl';
-import { FormChildrenProps, type DefaultValues, type FormSchema } from './types';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, type SubmitHandler, type UseFormProps, type UseFormReturn } from 'react-hook-form';
+import { type FormInputValues, type FormSchema, type FormSubmittedValues } from './types';
 
 type FormProps<TSchema extends FormSchema> = {
   schema: TSchema;
-  defaultValues?: DefaultValues<TSchema>;
-  children: (props: FormChildrenProps<TSchema>) => React.ReactNode;
+  onSubmit: SubmitHandler<FormSubmittedValues<TSchema>>;
+  options?: Omit<UseFormProps<FormInputValues<TSchema>>, 'resolver'>;
+  children: (props: UseFormReturn<FormInputValues<TSchema>>) => React.ReactNode;
 };
 
-const Form = <TSchema extends ZodObject<ZodRawShape>>({
-  schema,
-  defaultValues = {} as DefaultValues<TSchema>,
-  children,
-}: FormProps<TSchema>) => {
-  const scope = useRef(Symbol('form'));
+const Form = <TSchema extends FormSchema>({ schema, onSubmit, options, children }: FormProps<TSchema>) => {
+  const methods = useForm<FormInputValues<TSchema>, FormSubmittedValues<TSchema>>({
+    ...options,
+    resolver: zodResolver(schema),
+  });
 
-  return (
-    <Provider
-      initialValues={[
-        [valuesAtom, defaultAtoms(defaultValues)],
-        [errorsAtom, defaultErrors(schema, defaultValues)],
-      ]}
-      scope={scope.current}
-    >
-      <FormImpl scope={scope.current} schema={schema} defaultValues={defaultValues}>
-        {(props) => children(props)}
-      </FormImpl>
-    </Provider>
-  );
+  return <form onSubmit={methods.handleSubmit(onSubmit)}>{children(methods)}</form>;
 };
 
 export default Form;

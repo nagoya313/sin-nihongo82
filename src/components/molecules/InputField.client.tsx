@@ -1,33 +1,40 @@
 import { FormControl, FormErrorMessage, FormLabel, Icon, Tooltip } from '@chakra-ui/react';
-import { useAtom } from 'jotai';
+import { type FieldError, type FieldPath, type FieldValues } from 'react-hook-form';
 import { MdHelpOutline } from 'react-icons/md';
-import { type FieldError } from '../../libs/form/types';
+import { type TypedFieldValueControl } from '../../libs/form/types';
 
 type InputFieldValue = string | number;
 
-export type InputFieldPropsBase<TValue extends InputFieldValue> = {
+export type InputFieldPropsBase<
+  TFieldValues extends FieldValues,
+  TFieldName extends FieldPath<TFieldValues>,
+  TValue extends InputFieldValue
+> = {
+  control: TypedFieldValueControl<TFieldValues, TFieldName, TValue>;
+  name: TFieldName;
   label?: string;
   help?: string;
-  defaultValue?: TValue;
-  onChange: (value: TValue | undefined) => void;
+};
+
+type InputFieldProps<
+  TFieldValues extends FieldValues,
+  TFieldName extends FieldPath<TFieldValues>,
+  TValue extends InputFieldValue
+> = {
   error?: FieldError;
-};
-
-type ErrorFieldProps = {
-  errorsAtom: FieldError;
-};
-
-const ErrorField = ({ errorsAtom }: ErrorFieldProps) => {
-  const [errors] = useAtom(errorsAtom);
-
-  return <>{errors != null && errors}</>;
-};
-
-type InputFieldProps<TValue extends InputFieldValue> = {
   children: React.ReactNode;
-} & Omit<InputFieldPropsBase<TValue>, 'onChange' | 'defaultValue'>;
+} & Omit<InputFieldPropsBase<TFieldValues, TFieldName, TValue>, 'control' | 'name'>;
 
-const InputField = <TValue extends InputFieldValue>({ label, help, error, children }: InputFieldProps<TValue>) => (
+const InputField = <
+  TFieldValues extends FieldValues,
+  TFieldName extends FieldPath<TFieldValues>,
+  TValue extends InputFieldValue
+>({
+  label,
+  help,
+  error,
+  children,
+}: InputFieldProps<TFieldValues, TFieldName, TValue>) => (
   <FormControl isInvalid={error != null}>
     {label && (
       <FormLabel>
@@ -42,7 +49,7 @@ const InputField = <TValue extends InputFieldValue>({ label, help, error, childr
       </FormLabel>
     )}
     {children}
-    <FormErrorMessage>{error != null && <ErrorField errorsAtom={error} />}</FormErrorMessage>
+    <FormErrorMessage>{error?.message}</FormErrorMessage>
   </FormControl>
 );
 

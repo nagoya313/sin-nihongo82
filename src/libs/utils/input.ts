@@ -3,5 +3,5 @@ export const stringOnChange =
   ({ target }: React.ChangeEvent<HTMLInputElement>) =>
     onChange(target.value.trim() || undefined);
 
-export const numberOnChange = (onChange: (value: number | undefined) => void) => (_: string, valueAsNumber: number) =>
-  onChange(isNaN(valueAsNumber) ? undefined : valueAsNumber);
+export const numberOnChange = (onChange: (value: number | null) => void) => (_: string, valueAsNumber: number) =>
+  onChange(isNaN(valueAsNumber) ? null : valueAsNumber);

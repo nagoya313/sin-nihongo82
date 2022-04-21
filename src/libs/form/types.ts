@@ -1,38 +1,15 @@
-import { type Atom } from 'jotai';
-import { type PartialDeep, type ReadonlyDeep } from 'type-fest';
+import { type ArrayPath, type Control, type FieldPath, type FieldValues } from 'react-hook-form';
+import { type ReadonlyDeep } from 'type-fest';
 import { z, type ZodObject, type ZodRawShape } from 'zod';
 
 export type FormSchema = ZodObject<ZodRawShape>;
-type FormInput<TSchema extends FormSchema> = z.input<TSchema>;
-export type FieldName<TSchema extends FormSchema> = Extract<keyof FormInput<TSchema>, string>;
-export type FieldValue<TSchema extends FormSchema, TKey extends FieldName<TSchema>> = FormInput<TSchema>[TKey];
-export type FieldSchema<TSchema extends FormSchema, TKey extends FieldName<TSchema>> = TSchema['shape'][TKey];
-export type FieldError = Atom<string | undefined>;
-export type DefaultValues<TSchema extends FormSchema> = ReadonlyDeep<PartialDeep<FormInput<TSchema>>>;
+export type FormInputValues<TSchema extends FormSchema> = ReadonlyDeep<z.input<TSchema>>;
+export type FormSubmittedValues<TSchema extends FormSchema> = ReadonlyDeep<z.infer<TSchema>>;
+export type InputType = string | number;
+export type FieldType = InputType;
 
-type FormRegisterReturn<TSchema extends FormSchema, TFieldName extends FieldName<TSchema>> = {
-  scope: symbol;
-  error: FieldError | undefined;
-  schema: FieldSchema<TSchema, TFieldName>;
-  defaultValue?: FieldValue<TSchema, TFieldName>;
-  onChange: (next: FieldValue<TSchema, TFieldName> | undefined) => void;
-};
-
-export type FormState = {
-  isInvalid: boolean;
-};
-
-export type FormChildrenProps<TSchema extends FormSchema> = {
-  formState: FormState;
-  register: <TKey extends FieldName<TSchema>>(key: TKey) => FormRegisterReturn<TSchema, TKey>;
-};
-
-type SearchFormRegisterReturn<TSchema extends FormSchema, TFieldName extends FieldName<TSchema>> = Omit<
-  FormRegisterReturn<TSchema, TFieldName>,
-  'defaultValue'
->;
-
-export type SearchFormChildrenProps<TSchema extends FormSchema> = {
-  formState: FormState;
-  register: <TKey extends FieldName<TSchema>>(key: TKey) => SearchFormRegisterReturn<TSchema, TKey>;
-};
+export type TypedFieldValueControl<
+  TFieldValues extends FieldValues,
+  TFieldName extends FieldPath<TFieldValues> | ArrayPath<TFieldValues>,
+  TFieldType extends FieldType
+> = TFieldValues[TFieldName] extends TFieldType | undefined ? Control<TFieldValues> : never;
