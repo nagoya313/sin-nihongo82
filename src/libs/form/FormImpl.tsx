@@ -1,22 +1,20 @@
-import { VStack } from '@chakra-ui/react';
 import { type DefaultValues, type FormChildrenProps, type FormSchema } from './types';
-import { useRegister } from './useRegister';
+import { useFormRegister } from './useRegister';
 
 type FormImplProps<TSchema extends FormSchema> = {
+  scope: symbol;
   schema: TSchema;
   defaultValues?: DefaultValues<TSchema>;
   children: (props: FormChildrenProps<TSchema>) => React.ReactNode;
 };
 
-export const FormImpl = <TSchema extends FormSchema>({ schema, defaultValues, children }: FormImplProps<TSchema>) => {
-  const register = useRegister(schema, defaultValues);
+export const FormImpl = <TSchema extends FormSchema>({
+  scope,
+  schema,
+  defaultValues,
+  children,
+}: FormImplProps<TSchema>) => {
+  const register = useFormRegister(scope, schema, defaultValues);
 
-  return (
-    <VStack mt={4} align="start" as="form">
-      {children({
-        formState: { isInvalid: false },
-        register,
-      })}
-    </VStack>
-  );
+  return <>{children({ formState: { isInvalid: false }, register })}</>;
 };

@@ -11,6 +11,7 @@ export type FieldError = Atom<string | undefined>;
 export type DefaultValues<TSchema extends FormSchema> = ReadonlyDeep<PartialDeep<FormInput<TSchema>>>;
 
 type FormRegisterReturn<TSchema extends FormSchema, TFieldName extends FieldName<TSchema>> = {
+  scope: symbol;
   error: FieldError | undefined;
   schema: FieldSchema<TSchema, TFieldName>;
   defaultValue?: FieldValue<TSchema, TFieldName>;
@@ -24,4 +25,14 @@ export type FormState = {
 export type FormChildrenProps<TSchema extends FormSchema> = {
   formState: FormState;
   register: <TKey extends FieldName<TSchema>>(key: TKey) => FormRegisterReturn<TSchema, TKey>;
+};
+
+type SearchFormRegisterReturn<TSchema extends FormSchema, TFieldName extends FieldName<TSchema>> = Omit<
+  FormRegisterReturn<TSchema, TFieldName>,
+  'defaultValue'
+>;
+
+export type SearchFormChildrenProps<TSchema extends FormSchema> = {
+  formState: FormState;
+  register: <TKey extends FieldName<TSchema>>(key: TKey) => SearchFormRegisterReturn<TSchema, TKey>;
 };
