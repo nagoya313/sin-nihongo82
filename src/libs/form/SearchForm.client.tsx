@@ -1,7 +1,7 @@
 import { useUpdateEffect } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { unstable_useRefreshRoot as useRefreshRoot } from 'next/streaming';
-import { useTransition } from 'react';
+import React from 'react';
 import {
   useForm,
   useFormState,
@@ -34,12 +34,13 @@ const Search = <TFieldValues extends FieldValues>({ control, submit }: SearchPro
 
 type FormProps<TSchema extends FormSchema> = {
   schema: TSchema;
-  children: (props: UseFormReturn<FormInputValues<TSchema> & { isSearching: boolean }>) => React.ReactNode;
+  children: (props: UseFormReturn<FormInputValues<TSchema>> & { isSearching: boolean }) => React.ReactNode;
 };
 
 const SearchForm = <TSchema extends FormSchema>({ schema, children }: FormProps<TSchema>) => {
   const refresh = useRefreshRoot();
-  const [isSearching, startTransition] = useTransition();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [isSearching, startTransition] = (React as any).useTransition();
   const methods = useForm<FormInputValues<TSchema>, FormSubmittedValues<TSchema>>({
     defaultValues: schema.parse({}) as UseFormProps<FormInputValues<TSchema>>['defaultValues'],
     mode: 'onChange',
