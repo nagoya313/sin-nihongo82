@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { direction } from '../../libs/schema/direction';
-import { intRange } from '../../libs/schema/intRange';
-import { hiragana } from '../../libs/schema/regex';
+import { direction } from '~/libs/schema/direction';
+import { intRange } from '~/libs/schema/intRange';
+import { hiragana } from '~/libs/schema/regex';
 
 export const radicalQueryParams = z.object({
   direction,

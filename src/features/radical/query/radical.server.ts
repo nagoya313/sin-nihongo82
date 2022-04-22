@@ -1,5 +1,5 @@
 import { sql } from 'kysely';
-import { db } from '../../db/db.server';
+import { db } from '~/db/db.server';
 
 export const radical = (codePoint: number) =>
   db

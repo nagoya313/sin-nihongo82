@@ -1,6 +1,6 @@
 import { sql } from 'kysely';
-import { db } from '../../db/db.server';
-import { escapeLike } from '../../libs/utils/sqlEscape';
+import { db } from '~/db/db.server';
+import { escapeLike } from '~/utils/sql';
 import { type RadicalQueryParams } from './types';
 
 export const radicalStrokeCountOrder = ({ direction, strokeCount, read }: Omit<RadicalQueryParams, 'sort'>) =>

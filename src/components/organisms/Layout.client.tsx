@@ -12,12 +12,14 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { setErrorMap } from 'zod';
+import { errorMap } from '~/libs/schema/errors/errorMap';
 import AppProvider from '~/providers/AppProvider';
-import { errorMap } from '../../libs/schema/errors/errorMap';
-import { HEADER_HEIGHT } from '../../styles/constants';
+import { HEADER_HEIGHT } from '~/styles/constants';
 import SideBar from '../molecules/SideBar.client';
 import AppBar from './AppBar.client';
 import Footer from './Footer.client';
+
+setErrorMap((issue, ctx) => ({ message: errorMap(issue, ctx) }));
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -25,7 +27,6 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  setErrorMap((issue, ctx) => ({ message: errorMap(issue, ctx) }));
 
   return (
     <AppProvider>

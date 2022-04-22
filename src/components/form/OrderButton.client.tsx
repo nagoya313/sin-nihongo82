@@ -1,7 +1,7 @@
 import { IconButton } from '@chakra-ui/react';
 import { Controller, useFormState, type FieldPath, type FieldValues } from 'react-hook-form';
 import { MdExpandLess, MdExpandMore } from 'react-icons/md';
-import { type TypedFieldValueControl } from '../../libs/form/types';
+import { type TypedFieldValueControl } from './types';
 
 type OrderButtonProps<TFieldValues extends FieldValues, TFieldName extends FieldPath<TFieldValues>> = {
   control: TypedFieldValueControl<TFieldValues, TFieldName, 'asc' | 'desc'>;

@@ -1,8 +1,8 @@
 import { Box, Wrap } from '@chakra-ui/react';
 import { useRef } from 'react';
 import { GroupedVirtuoso, type GroupedVirtuosoHandle } from 'react-virtuoso';
-import { type LoadableData } from '../../features/loadable';
-import { Path } from '../../features/path';
+import { type LoadableData } from '~/features/loadable';
+import { Path } from '~/features/path';
 import GroupLabel from '../atoms/GroupLabel.client';
 import WordItem from '../atoms/WordItem.client';
 import JumpList from '../molecules/JumpList.client';

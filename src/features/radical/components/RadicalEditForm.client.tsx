@@ -1,10 +1,10 @@
 import { VStack } from '@chakra-ui/react';
 import omit from 'lodash/omit';
-import { type radical } from '../../features/radical/radicalQuery.server';
-import { radicalUpdateParams } from '../../features/radical/updateParams';
-import Form from '../../libs/form/Form.client';
-import SubmitButton from '../atoms/SubmitButton.client';
-import NumberInputField from './NumberInputField.client';
+import Form from '~/components/form/Form.client';
+import NumberInputField from '~/components/form/NumberInputField.client';
+import SubmitButton from '~/components/form/SubmitButton.client';
+import { type radical } from '../query/radical.server';
+import { radicalUpdateParams } from '../query/updateParams';
 
 type RadicalEditFormProps = {
   radical: NonNullable<Awaited<ReturnType<typeof radical>>>;

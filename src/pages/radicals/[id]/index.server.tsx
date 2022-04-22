@@ -1,19 +1,20 @@
 import { type GetServerSideProps } from 'next';
 import { Suspense } from 'react';
 import { z } from 'zod';
-import RadicalEditButton from '../../../components/atoms/RadicalEditButton.client';
-import PageInfo from '../../../components/molecules/PageInfo.client';
-import RadicalDefine from '../../../components/molecules/RadicalDefine.client';
-import ResultSkelton from '../../../components/molecules/ResultSkelton.client';
-import RadicalKanjiReadOrder from '../../../components/organisms/RadicalKanjiReadOrder.server';
-import RadicalKanjiSearch from '../../../components/organisms/RadicalKanjiSearch.client';
-import RadicalKanjiStrokeCountOrder from '../../../components/organisms/RadicalKanjiStrokeCountOrder.server';
-import Page from '../../../components/templates/Page.client';
-import { radicalKanjiQueryParams } from '../../../features/kanji/queryParams';
-import { Loadable } from '../../../features/loadable';
-import { radical } from '../../../features/radical/radicalQuery.server';
-import { smallInt } from '../../../libs/schema/postgres';
-import { numberPreprocess } from '../../../libs/schema/preprocess';
+import EditButton from '~/components/atoms/EditButton.client';
+import PageInfo from '~/components/molecules/PageInfo.client';
+import ResultSkelton from '~/components/molecules/ResultSkelton.client';
+import Page from '~/components/templates/Page.client';
+import RadicalKanjiReadOrder from '~/features/kanji/components/RadicalKanjiReadOrder.server';
+import RadicalKanjiSearch from '~/features/kanji/components/RadicalKanjiSearch.client';
+import RadicalKanjiStrokeCountOrder from '~/features/kanji/components/RadicalKanjiStrokeCountOrder.server';
+import { radicalKanjiQueryParams } from '~/features/kanji/query/params';
+import { Loadable } from '~/features/loadable';
+import { Path } from '~/features/path';
+import RadicalDefine from '~/features/radical/components/RadicalDefine.client';
+import { radical } from '~/features/radical/query/radical.server';
+import { smallInt } from '~/libs/schema/postgres';
+import { numberPreprocess } from '~/libs/schema/preprocess';
 
 type RadicalProps = z.infer<typeof radicalKanjiQueryParams> & {
   radical: NonNullable<Awaited<ReturnType<typeof radical>>>;
@@ -28,7 +29,7 @@ const Radical = ({ radical, ...params }: RadicalProps) => {
         avatar={radical.radical}
         title="部首別索引"
         subText={`（現在は旧日本語字形で部首が「${radical.radical}」の漢字が登録されていますが、新日本語字形で部首が「${radical.radical}」のものに置換予定です。）`}
-        action={<RadicalEditButton codePoint={radical.code_point} />}
+        action={<EditButton href={Path.radicalEdit(radical.code_point)} />}
       />
       <RadicalDefine radical={radical} />
       <RadicalKanjiSearch

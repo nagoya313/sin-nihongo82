@@ -1,12 +1,12 @@
 import { getSession } from '@auth0/nextjs-auth0';
 import { type GetServerSideProps } from 'next';
 import { z } from 'zod';
-import PageInfo from '../../../components/molecules/PageInfo.client';
-import RadicalEditForm from '../../../components/molecules/RadicalEditForm.client';
-import Page from '../../../components/templates/Page.client';
-import { radical } from '../../../features/radical/radicalQuery.server';
-import { smallInt } from '../../../libs/schema/postgres';
-import { numberPreprocess } from '../../../libs/schema/preprocess';
+import PageInfo from '~/components/molecules/PageInfo.client';
+import Page from '~/components/templates/Page.client';
+import RadicalEditForm from '~/features/radical/components/RadicalEditForm.client';
+import { radical } from '~/features/radical/query/radical.server';
+import { smallInt } from '~/libs/schema/postgres';
+import { numberPreprocess } from '~/libs/schema/preprocess';
 
 type RadicalEditProps = {
   radical: NonNullable<Awaited<ReturnType<typeof radical>>>;

@@ -1,11 +1,11 @@
-import ExternalLink from '../components/atoms/ExternalLink.client';
-import Heading from '../components/chakra-ui/Heading.client';
-import ListItem from '../components/chakra-ui/ListItem.client';
-import Text from '../components/chakra-ui/Text.client';
-import UnorderedList from '../components/chakra-ui/UnorderedList.client';
-import InfoIcon from '../components/icons/InfoIcon.client';
-import PageInfo from '../components/molecules/PageInfo.client';
-import Page from '../components/templates/Page.client';
+import ExternalLink from '~/components/atoms/ExternalLink.client';
+import Heading from '~/components/chakra-ui/Heading.client';
+import ListItem from '~/components/chakra-ui/ListItem.client';
+import Text from '~/components/chakra-ui/Text.client';
+import UnorderedList from '~/components/chakra-ui/UnorderedList.client';
+import InfoIcon from '~/components/icons/InfoIcon.client';
+import PageInfo from '~/components/molecules/PageInfo.client';
+import Page from '~/components/templates/Page.client';
 
 const Info = () => (
   <Page title="info">

@@ -1,7 +1,6 @@
 import { sql } from 'kysely';
-import { db } from '../../db/db.server';
-import { escapeLike } from '../../libs/utils/sqlEscape';
-import { kanaTranslate } from '../../libs/utils/sqlFunction';
+import { db } from '~/db/db.server';
+import { escapeLike, kanaTranslate } from '~/utils/sql';
 import { type RadicalKanjiQueryParams } from './types';
 
 type QueryParams = Omit<RadicalKanjiQueryParams, 'sort'> & { radicalId: number };

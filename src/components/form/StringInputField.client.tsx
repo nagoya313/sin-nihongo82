@@ -1,6 +1,6 @@
 import { Input } from '@chakra-ui/react';
 import { Controller, type FieldPath, type FieldValues } from 'react-hook-form';
-import { stringOnChange } from '../../libs/utils/input';
+import { stringOnChange } from '~/utils/input';
 import InputField, { type InputFieldPropsBase } from './InputField.client';
 
 type StringInputFieldProps<TFieldValues extends FieldValues, TFieldName extends FieldPath<TFieldValues>> = {

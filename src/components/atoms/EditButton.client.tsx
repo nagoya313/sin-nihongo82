@@ -2,20 +2,20 @@ import { useUser } from '@auth0/nextjs-auth0';
 import { IconButton } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { MdEdit } from 'react-icons/md';
-import { Path } from '../../features/path';
+import { type PathString } from '~/features/path';
 
-type RadicalEditButtonProps = {
-  codePoint: number;
+type EditButtonProps = {
+  href: PathString;
 };
 
-const RadicalEditButton = ({ codePoint }: RadicalEditButtonProps) => {
+const RadicalEditButton = ({ href }: EditButtonProps) => {
   const { user } = useUser();
 
   if (user == null) return null;
 
   return (
-    <NextLink href={Path.radicalEdit(codePoint)} passHref>
-      <IconButton aria-label="radical-editMdBuild" icon={<MdEdit />} />
+    <NextLink href={href} passHref>
+      <IconButton aria-label="edit" icon={<MdEdit />} />
     </NextLink>
   );
 };

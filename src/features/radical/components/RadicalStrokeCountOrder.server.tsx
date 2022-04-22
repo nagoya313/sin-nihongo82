@@ -1,7 +1,7 @@
-import { type Loadable } from '../../features/loadable';
-import SearchNotFound from '../atoms/SearchNotFound.client';
-import QueryResult from './QueryResult.client';
-import StrokeCountOrder from './StrokeCountOrder.client';
+import SearchNotFound from '~/components/atoms/SearchNotFound.client';
+import QueryResult from '~/components/organisms/QueryResult.client';
+import StrokeCountOrder from '~/components/organisms/StrokeCountOrder.client';
+import { type Loadable } from '../../loadable';
 
 type RadicalStrokeCountOrderProps = {
   loadable: Loadable<'radicalStrokeCountOrder'>;

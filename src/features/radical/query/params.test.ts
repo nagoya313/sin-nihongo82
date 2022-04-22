@@ -1,4 +1,4 @@
-import { radicalQueryParams } from './queryParams';
+import { radicalQueryParams } from './params';
 
 describe('radicalQueryParams', () => {
   describe('default values', () => {

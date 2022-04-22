@@ -1,6 +1,6 @@
 import { sql } from 'kysely';
-import { db } from '../../db/db.server';
-import { escapeLike } from '../../libs/utils/sqlEscape';
+import { db } from '~/db/db.server';
+import { escapeLike } from '~/utils/sql';
 import { type RadicalQueryParams } from './types';
 
 type Results = ReadonlyArray<{ code_point: number; read: string }>;

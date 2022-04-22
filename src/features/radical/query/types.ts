@@ -1,6 +1,6 @@
 import { type z } from 'zod';
-import { type Timestamp } from '../../db/timestamp';
-import { radicalQueryParams } from './queryParams';
+import { type Timestamp } from '~/db/timestamp';
+import { radicalQueryParams } from './params';
 
 export type Radical = {
   readonly code_point: number;

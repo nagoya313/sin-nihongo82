@@ -1,7 +1,7 @@
-import { type Loadable } from '../../features/loadable';
-import SearchNotFound from '../atoms/SearchNotFound.client';
-import QueryResult from './QueryResult.client';
-import ReadOrder from './ReadOrder.client';
+import SearchNotFound from '~/components/atoms/SearchNotFound.client';
+import QueryResult from '~/components/organisms/QueryResult.client';
+import ReadOrder from '~/components/organisms/ReadOrder.client';
+import { type Loadable } from '../../loadable';
 
 type RadicalReadOrderProps = {
   loadable: Loadable<'radicalReadOrder'>;

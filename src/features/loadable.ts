@@ -1,9 +1,9 @@
-import { makeLoadable, type Loadable as LoadbleType } from '../libs/loadable';
-import { type LoadableData as LibLoadableData } from '../libs/loadable/types';
-import { radicalKanjiReadOrder } from './kanji/radicalKanjiReadOrder.server';
-import { radicalKanjiStrokeCountOrder } from './kanji/radicalKanjiStrokeCountOrder.server';
-import { radicalReadOrder } from './radical/radicalReadOrder.server';
-import { radicalStrokeCountOrder } from './radical/radicalStrokeCountOrder.server';
+import { makeLoadable, type Loadable as LoadbleType } from '~/libs/loadable';
+import { type LoadableData as LibLoadableData } from '~/libs/loadable/types';
+import { radicalKanjiReadOrder } from './kanji/query/radicalKanjiReadOrder.server';
+import { radicalKanjiStrokeCountOrder } from './kanji/query/radicalKanjiStrokeCountOrder.server';
+import { radicalReadOrder } from './radical/query/radicalReadOrder.server';
+import { radicalStrokeCountOrder } from './radical/query/radicalStrokeCountOrder.server';
 
 export const Loadable = makeLoadable({
   radicalStrokeCountOrder,

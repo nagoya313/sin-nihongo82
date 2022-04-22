@@ -1,5 +1,5 @@
 import { Flex, Heading, Text } from '@chakra-ui/react';
-import { type radical } from '../../features/radical/radicalQuery.server';
+import { type radical } from '../query/radical.server';
 
 type RadicalDefineProps = {
   radical: NonNullable<Awaited<ReturnType<typeof radical>>>;

@@ -1,12 +1,11 @@
 import { HStack, Tab, TabList, TabPanel, TabPanels, Tabs, VStack } from '@chakra-ui/react';
-import React from 'react';
-import SearchPanel from '../../components/molecules/SearchPanel.client';
-import { radicalQueryParams } from '../../features/radical/queryParams';
-import SearchForm from '../../libs/form/SearchForm.client';
-import { getNumberRange } from '../../libs/schema/intRange';
-import OrderButton from '../atoms/OrderButton.client';
-import NumberInputField from '../molecules/NumberInputField.client';
-import StringInputField from '../molecules/StringInputField.client';
+import NumberInputField from '~/components/form/NumberInputField.client';
+import OrderButton from '~/components/form/OrderButton.client';
+import SearchForm from '~/components/form/SearchForm.client';
+import StringInputField from '~/components/form/StringInputField.client';
+import SearchPanel from '~/components/molecules/SearchPanel.client';
+import { getNumberRange } from '~/libs/schema/intRange';
+import { radicalQueryParams } from '../query/params';
 
 type RadicalSearchProps = {
   strokeCountOrder: React.ReactNode;

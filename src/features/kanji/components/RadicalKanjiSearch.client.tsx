@@ -1,12 +1,12 @@
 import { HStack, Tab, TabList, TabPanel, TabPanels, Tabs, VStack } from '@chakra-ui/react';
-import { radicalKanjiQueryParams } from '../../features/kanji/queryParams';
-import SearchForm from '../../libs/form/SearchForm.client';
-import { getNumberRange } from '../../libs/schema/intRange';
-import OrderButton from '../atoms/OrderButton.client';
-import NumberInputField from '../molecules/NumberInputField.client';
-import RadioFieldset from '../molecules/RadioFieldset.client';
-import SearchPanel from '../molecules/SearchPanel.client';
-import StringInputField from '../molecules/StringInputField.client';
+import NumberInputField from '~/components/form/NumberInputField.client';
+import OrderButton from '~/components/form/OrderButton.client';
+import RadioFieldset from '~/components/form/RadioFieldset.client';
+import SearchForm from '~/components/form/SearchForm.client';
+import StringInputField from '~/components/form/StringInputField.client';
+import SearchPanel from '~/components/molecules/SearchPanel.client';
+import { getNumberRange } from '~/libs/schema/intRange';
+import { radicalKanjiQueryParams } from '../query/params';
 
 const reglurLabel = { none: '指定なし', true: '常用', false: '常用外' } as const;
 

@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { type Timestamp } from '../../db/timestamp';
-import { type radicalKanjiQueryParams } from './queryParams';
+import { type Timestamp } from '~/db/timestamp';
+import { type radicalKanjiQueryParams } from './params';
 
 export type Kanji = {
   readonly code_point: number;

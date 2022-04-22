@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { intRange } from '../../libs/schema/intRange';
-import { smallInt } from '../../libs/schema/postgres';
-import { hiragana } from '../../libs/schema/regex';
+import { intRange } from '~/libs/schema/intRange';
+import { smallInt } from '~/libs/schema/postgres';
+import { hiragana } from '~/libs/schema/regex';
 
 export const radicalUpdateParams = z.object({
   code_point: smallInt,

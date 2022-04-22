@@ -1,6 +1,6 @@
 import { NumberInput, NumberInputField as CUINumberInputField } from '@chakra-ui/react';
 import { Controller, type FieldPath, type FieldValues } from 'react-hook-form';
-import { numberOnChange } from '../../libs/utils/input';
+import { numberOnChange } from '~/utils/input';
 import InputField, { type InputFieldPropsBase } from './InputField.client';
 
 type NumberInputFieldProps<TFieldValues extends FieldValues, TFieldName extends FieldPath<TFieldValues>> = {

@@ -1,5 +1,5 @@
 import { Heading, Stack } from '@chakra-ui/react';
-import { Path } from '../../features/path';
+import { Path } from '~/features/path';
 import SideBarLink from '../atoms/SideBarLink.client';
 import InfoIcon from '../icons/InfoIcon.client';
 import RadicalIcon from '../icons/RadicalIcon.client';

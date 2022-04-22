@@ -1,7 +1,7 @@
 import { FormControl, FormErrorMessage, FormLabel, Icon, Tooltip } from '@chakra-ui/react';
 import { useFormState, type FieldPath, type FieldValues } from 'react-hook-form';
 import { MdHelpOutline } from 'react-icons/md';
-import { type TypedFieldValueControl } from '../../libs/form/types';
+import { type TypedFieldValueControl } from './types';
 
 type InputFieldValue = string | number;
 

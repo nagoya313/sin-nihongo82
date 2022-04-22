@@ -1,6 +1,6 @@
 import { FormControl, FormLabel, HStack, Radio, RadioGroup } from '@chakra-ui/react';
 import { Controller, type FieldPath, type FieldValues } from 'react-hook-form';
-import { type TypedFieldValueControl } from '../../libs/form/types';
+import { type TypedFieldValueControl } from './types';
 
 type RadioFieldsetProps<
   TFieldValues extends FieldValues,

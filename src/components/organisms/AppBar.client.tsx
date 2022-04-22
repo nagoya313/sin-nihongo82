@@ -1,9 +1,9 @@
 import { Avatar, Flex, Heading, HStack, IconButton, LinkBox, LinkOverlay, useColorModeValue } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { MdMenu } from 'react-icons/md';
-import { HEADER_HEIGHT } from '../../styles/constants';
+import { HEADER_HEIGHT } from '~/styles/constants';
+import AuthButton from '../atoms/AuthButton.client';
 import ColorChangeButton from '../atoms/ColorChangeButton.client';
-import AuthButton from './AuthButton.client';
 
 type AppBarProps = {
   onSideBarOpen: () => void;
