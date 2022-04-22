@@ -1,5 +1,5 @@
+import '~/utils/env';
 import { connectDatabase } from './connection.server';
-import './env';
 import { kanjiSeed } from './seeds/kanji';
 import { radicalSeed } from './seeds/radical';
 

@@ -1,10 +1,10 @@
 import { FileMigrationProvider, Migrator } from 'kysely';
+import '~/utils/env';
 import { connectDatabase } from './connection.server';
-import './env';
 
 (async () => {
   const db = connectDatabase();
-  const migrator = new Migrator({ db, provider: new FileMigrationProvider('./src/db/migrations') });
+  const migrator = new Migrator({ db, provider: new FileMigrationProvider('src/db/migrations') });
 
   const { error, results } = await migrator.migrateToLatest();
 

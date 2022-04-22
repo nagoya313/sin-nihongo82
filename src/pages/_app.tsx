@@ -1,10 +1,10 @@
 import type { AppProps } from 'next/app';
-import Providers from '../components/templates/Providers.client';
+import AppProvider from '~/providers/AppProvider';
 
 const App = ({ Component, pageProps }: AppProps) => (
-  <Providers>
+  <AppProvider>
     <Component {...pageProps} />
-  </Providers>
+  </AppProvider>
 );
 
 export default App;
