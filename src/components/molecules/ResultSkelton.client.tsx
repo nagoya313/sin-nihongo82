@@ -5,15 +5,15 @@ const ResultSkelton = () => (
   <>
     <Skeleton>
       <Box p={4} rounded={4} w="full">
-        loading radical
+        loading...
       </Box>
     </Skeleton>
     <Wrap>
       {times(3, (index) => (
-        <Skeleton>
+        <Skeleton key={index}>
           <WrapItem>
             <Center key={index} w="40px" h="40px">
-              loading radical
+              loading...
             </Center>
           </WrapItem>
         </Skeleton>

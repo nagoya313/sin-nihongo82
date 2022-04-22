@@ -1,25 +1,34 @@
-import { IconButton, useControllableState } from '@chakra-ui/react';
+import { IconButton } from '@chakra-ui/react';
+import { Controller, useFormState, type FieldPath, type FieldValues } from 'react-hook-form';
 import { MdExpandLess, MdExpandMore } from 'react-icons/md';
-import { direction } from '../../libs/schema/direction';
+import { type TypedFieldValueControl } from '../../libs/form/types';
 
-type OrderButtonProps = {
-  schema: typeof direction;
-  onChange: (direction: 'asc' | 'desc') => void;
+type OrderButtonProps<TFieldValues extends FieldValues, TFieldName extends FieldPath<TFieldValues>> = {
+  control: TypedFieldValueControl<TFieldValues, TFieldName, 'asc' | 'desc'>;
+  name: TFieldName;
   disabled?: boolean;
 };
 
-const OrderButton = ({ schema, onChange, disabled }: OrderButtonProps) => {
-  const [direction, setDirection] = useControllableState<'asc' | 'desc'>({
-    defaultValue: schema._def.defaultValue(),
-    onChange,
-  });
+const OrderButton = <TFieldValues extends FieldValues, TFieldName extends FieldPath<TFieldValues>>({
+  control,
+  name,
+  disabled,
+}: OrderButtonProps<TFieldValues, TFieldName>) => {
+  const { isValid } = useFormState({ control });
 
   return (
-    <IconButton
-      aria-label="order"
-      onClick={() => setDirection((prev) => (prev === 'asc' ? 'desc' : 'asc'))}
-      icon={direction === 'asc' ? <MdExpandLess /> : <MdExpandMore />}
-      isDisabled={disabled}
+    <Controller
+      control={control}
+      name={name}
+      render={({ field: { value, onChange, ...otherField } }) => (
+        <IconButton
+          aria-label="order"
+          onClick={() => onChange(value === 'asc' ? 'desc' : 'asc')}
+          icon={value === 'asc' ? <MdExpandLess /> : <MdExpandMore />}
+          isDisabled={!isValid || disabled}
+          {...otherField}
+        />
+      )}
     />
   );
 };

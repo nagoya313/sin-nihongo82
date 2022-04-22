@@ -1,5 +1,5 @@
 import { Input } from '@chakra-ui/react';
-import { useController, type FieldPath, type FieldValues } from 'react-hook-form';
+import { Controller, type FieldPath, type FieldValues } from 'react-hook-form';
 import { stringOnChange } from '../../libs/utils/input';
 import InputField, { type InputFieldPropsBase } from './InputField.client';
 
@@ -12,22 +12,22 @@ const StringInputField = <TFieldValues extends FieldValues, TFieldName extends F
   name,
   placeholder,
   ...othres
-}: StringInputFieldProps<TFieldValues, TFieldName>) => {
-  const {
-    field: { onChange, ...otherField },
-    fieldState: { error },
-  } = useController({ control, name });
-
-  return (
-    <InputField error={error} {...othres}>
-      <Input
-        focusBorderColor="purple.400"
-        placeholder={placeholder}
-        onChange={stringOnChange(onChange)}
-        {...otherField}
-      />
-    </InputField>
-  );
-};
+}: StringInputFieldProps<TFieldValues, TFieldName>) => (
+  <InputField control={control} name={name} {...othres}>
+    <Controller
+      control={control}
+      name={name}
+      render={({ field: { onChange, value, ...otherField } }) => (
+        <Input
+          focusBorderColor="purple.400"
+          placeholder={placeholder}
+          defaultValue={value}
+          onChange={stringOnChange(onChange)}
+          {...otherField}
+        />
+      )}
+    />
+  </InputField>
+);
 
 export default StringInputField;

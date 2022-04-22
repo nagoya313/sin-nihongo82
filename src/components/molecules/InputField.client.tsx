@@ -1,5 +1,5 @@
 import { FormControl, FormErrorMessage, FormLabel, Icon, Tooltip } from '@chakra-ui/react';
-import { type FieldError, type FieldPath, type FieldValues } from 'react-hook-form';
+import { useFormState, type FieldPath, type FieldValues } from 'react-hook-form';
 import { MdHelpOutline } from 'react-icons/md';
 import { type TypedFieldValueControl } from '../../libs/form/types';
 
@@ -21,36 +21,41 @@ type InputFieldProps<
   TFieldName extends FieldPath<TFieldValues>,
   TValue extends InputFieldValue
 > = {
-  error?: FieldError;
   children: React.ReactNode;
-} & Omit<InputFieldPropsBase<TFieldValues, TFieldName, TValue>, 'control' | 'name'>;
+} & InputFieldPropsBase<TFieldValues, TFieldName, TValue>;
 
 const InputField = <
   TFieldValues extends FieldValues,
   TFieldName extends FieldPath<TFieldValues>,
   TValue extends InputFieldValue
 >({
+  control,
+  name,
   label,
   help,
-  error,
   children,
-}: InputFieldProps<TFieldValues, TFieldName, TValue>) => (
-  <FormControl isInvalid={error != null}>
-    {label && (
-      <FormLabel>
-        {label}
-        {help && (
-          <Tooltip label={help}>
-            <span>
-              <Icon as={MdHelpOutline} />
-            </span>
-          </Tooltip>
-        )}
-      </FormLabel>
-    )}
-    {children}
-    <FormErrorMessage>{error?.message}</FormErrorMessage>
-  </FormControl>
-);
+}: InputFieldProps<TFieldValues, TFieldName, TValue>) => {
+  const { errors } = useFormState({ control, name });
+  const error = errors[name];
+
+  return (
+    <FormControl isInvalid={error != null}>
+      {label && (
+        <FormLabel>
+          {label}
+          {help && (
+            <Tooltip label={help}>
+              <span>
+                <Icon as={MdHelpOutline} />
+              </span>
+            </Tooltip>
+          )}
+        </FormLabel>
+      )}
+      {children}
+      <FormErrorMessage>{error?.message}</FormErrorMessage>
+    </FormControl>
+  );
+};
 
 export default InputField;

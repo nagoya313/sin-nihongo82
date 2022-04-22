@@ -1,30 +1,63 @@
-import { Provider } from 'jotai';
-import { useRef } from 'react';
-import { type ZodObject, type ZodRawShape } from 'zod';
-import { errorsAtom, valuesAtom } from './atoms';
-import { FormImpl } from './FormImpl';
-import { FormChildrenProps, type FormSchema } from './types';
+import { useUpdateEffect } from '@chakra-ui/react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { unstable_useRefreshRoot as useRefreshRoot } from 'next/streaming';
+import { useTransition } from 'react';
+import {
+  useForm,
+  useFormState,
+  useWatch,
+  type Control,
+  type FieldValues,
+  type UseFormProps,
+  type UseFormReturn,
+} from 'react-hook-form';
+import { useDebouncedCallback } from 'use-debounce';
+import { type FormInputValues, type FormSchema, type FormSubmittedValues } from './types';
 
-type SearchFormProps<TSchema extends FormSchema> = {
-  schema: TSchema;
-  children: (props: FormChildrenProps<TSchema>) => React.ReactNode;
+type SearchProps<TFieldValues extends FieldValues> = {
+  control: Control<TFieldValues>;
+  submit: () => void;
 };
 
-const SearchForm = <TSchema extends ZodObject<ZodRawShape>>({ schema, children }: SearchFormProps<TSchema>) => {
-  const scope = useRef(Symbol('search-form'));
+const Search = <TFieldValues extends FieldValues>({ control, submit }: SearchProps<TFieldValues>) => {
+  const values = useWatch({ control });
+  const { isValid } = useFormState({ control });
+
+  useUpdateEffect(() => {
+    if (isValid) {
+      submit();
+    }
+  }, [values, isValid]);
+
+  return <></>;
+};
+
+type FormProps<TSchema extends FormSchema> = {
+  schema: TSchema;
+  children: (props: UseFormReturn<FormInputValues<TSchema> & { isSearching: boolean }>) => React.ReactNode;
+};
+
+const SearchForm = <TSchema extends FormSchema>({ schema, children }: FormProps<TSchema>) => {
+  const refresh = useRefreshRoot();
+  const [isSearching, startTransition] = useTransition();
+  const methods = useForm<FormInputValues<TSchema>, FormSubmittedValues<TSchema>>({
+    defaultValues: schema.parse({}) as UseFormProps<FormInputValues<TSchema>>['defaultValues'],
+    mode: 'onChange',
+    shouldFocusError: false,
+    resolver: zodResolver(schema),
+  });
+
+  const submit = methods.handleSubmit(
+    useDebouncedCallback((params) => {
+      startTransition(() => refresh(params));
+    }, 200)
+  );
 
   return (
-    <Provider
-      initialValues={[
-        [valuesAtom, {}],
-        [errorsAtom, {}],
-      ]}
-      scope={scope.current}
-    >
-      <FormImpl scope={scope.current} schema={schema} defaultValues={defaultValues}>
-        {(props) => children(props)}
-      </FormImpl>
-    </Provider>
+    <form onSubmit={submit}>
+      {children({ ...methods, isSearching })}
+      <Search control={methods.control} submit={submit} />
+    </form>
   );
 };
 
