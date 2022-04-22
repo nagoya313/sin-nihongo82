@@ -23,7 +23,7 @@ const RadicalKanjiSearch = ({ strokeCountOrder, readOrder }: RadicalSearchProps)
       {({ control, isSearching }) => (
         <>
           <SearchPanel>
-            <VStack as="form" w="full" align="start">
+            <VStack w="full" align="start">
               <HStack align="start">
                 <StringInputField
                   control={control}
