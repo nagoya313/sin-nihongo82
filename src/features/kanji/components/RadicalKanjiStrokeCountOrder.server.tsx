@@ -1,5 +1,5 @@
+import QueryResult from '~/components/atoms/QueryResult.client';
 import SearchNotFound from '~/components/atoms/SearchNotFound.client';
-import QueryResult from '~/components/organisms/QueryResult.client';
 import StrokeCountOrder from '~/components/organisms/StrokeCountOrder.client';
 import { type Loadable } from '../../loadable';
 
