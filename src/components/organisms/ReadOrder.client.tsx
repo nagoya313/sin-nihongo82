@@ -33,7 +33,7 @@ const ReadOrder = ({ data }: ReadOrderProps) => {
                   {codePoints.map(({ code_point }, index) => (
                     <Fragment key={`${name}-${code_point}`}>
                       {index === 0 && <ReadBadge name={name} />}
-                      <WordItem codePoint={code_point} path={Path.radical} />
+                      <WordItem codePoint={code_point} href={Path.radical} />
                     </Fragment>
                   ))}
                 </Fragment>
