@@ -1,5 +1,5 @@
-import { type Kanji, type KanjiRead } from '~/features/kanji/types';
-import { type Radical, type RadicalRead } from '~/features/radical/types';
+import { type Kanji, type KanjiRead } from '~/features/kanji/query/types';
+import { type Radical, type RadicalRead } from '~/features/radical/query/types';
 
 export type Database = {
   radical: Radical;
