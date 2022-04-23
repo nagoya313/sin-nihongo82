@@ -44,7 +44,7 @@ export const makePath = <TPath extends string>(...args: MakePathArgs<TPath>) => 
 
 type PathParamsSchema = ZodObject<ZodRawShape>;
 
-type PathParamsGetCheckServerSideProps<TSchema extends PathParamsSchema, TProps> = (
+type PathParamsCheckGetServerSideProps<TSchema extends PathParamsSchema, TProps> = (
   context: Parameters<GetServerSideProps<TProps>>[0],
   params: z.infer<TSchema>
 ) => ReturnType<GetServerSideProps<TProps>>;
@@ -52,7 +52,7 @@ type PathParamsGetCheckServerSideProps<TSchema extends PathParamsSchema, TProps>
 export const pathParamsCheck =
   <TSchema extends PathParamsSchema, TProps>(
     schema: TSchema,
-    getServerSideProps: PathParamsGetCheckServerSideProps<TSchema, TProps>
+    getServerSideProps: PathParamsCheckGetServerSideProps<TSchema, TProps>
   ): GetServerSideProps =>
   async (context) => {
     const parsedParams = schema.safeParse(context.params);
