@@ -3,12 +3,13 @@ import { IconButton } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { MdEdit } from 'react-icons/md';
 import { type PathString } from '~/features/path';
+import { type PathParamsWithProps } from '~/utils/path';
 
-type EditButtonProps = {
-  href: PathString;
-};
+type EditButtonProps<THref extends PathString> = PathParamsWithProps<{
+  href: THref;
+}>;
 
-const RadicalEditButton = ({ href }: EditButtonProps) => {
+const RadicalEditButton = <THref extends PathString>({ href }: EditButtonProps<THref>) => {
   const { user } = useUser();
 
   if (user == null) return null;

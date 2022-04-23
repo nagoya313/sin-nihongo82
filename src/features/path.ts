@@ -1,17 +1,16 @@
 import { ValueOf } from 'type-fest';
+import { home } from './home/path';
+import { info } from './info/path';
+import { kanji } from './kanji/path';
+import { radical, radicalEdit, radicals } from './radical/path';
 
 export const Path = {
-  info: '/info',
-  radicals: '/radicals',
-  radical: (codePoint: number) => `/radicals/${codePoint}` as const,
-  radicalEdit: (codePoint: number) => `/radicals/${codePoint}/edit` as const,
+  home,
+  info,
+  radicals,
+  radical,
+  radicalEdit,
+  kanji,
 } as const;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type PathValue<TValue extends ValueOf<typeof Path>> = TValue extends (...params: any[]) => string
-  ? ReturnType<TValue>
-  : TValue;
-
-export type PathString = ValueOf<{
-  [key in keyof typeof Path]: PathValue<typeof Path[key]>;
-}>;
+export type PathString = ValueOf<typeof Path>;

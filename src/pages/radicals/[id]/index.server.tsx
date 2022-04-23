@@ -29,7 +29,7 @@ const Radical = ({ radical, ...params }: RadicalProps) => {
         avatar={radical.radical}
         title="部首別索引"
         subText={`（現在は旧日本語字形で部首が「${radical.radical}」の漢字が登録されていますが、新日本語字形で部首が「${radical.radical}」のものに置換予定です。）`}
-        action={<EditButton href={Path.radicalEdit(radical.code_point)} />}
+        action={<EditButton href={Path.radicalEdit} params={{ id: radical.code_point }} />}
       />
       <RadicalDefine radical={radical} />
       <RadicalKanjiSearch
