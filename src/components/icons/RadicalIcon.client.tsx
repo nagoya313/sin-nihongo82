@@ -1,7 +1,8 @@
-import { Icon, type IconProps } from '@chakra-ui/react';
+import { Icon } from '@chakra-ui/react';
 import { MdOutlinePark } from 'react-icons/md';
+import { type IconProps } from '~/utils/types';
 
-type RadicalIconProps = Omit<IconProps, 'as'>;
+type RadicalIconProps = IconProps;
 
 const RadicalIcon = ({ fontSize = 24, ...props }: RadicalIconProps) => (
   <Icon {...props} fontSize={fontSize} as={MdOutlinePark} />

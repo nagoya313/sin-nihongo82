@@ -1,16 +1,17 @@
 import { Box, Heading, HStack, LinkBox, LinkOverlay, Text, useColorModeValue, WrapItem } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import CircleIcon from '~/components/atoms/CircleIcon.client';
 import { type PathString } from '~/features/path';
-import CircleIcon from '../atoms/CircleIcon.client';
+import { type PathParamsWithProps } from '~/utils/path';
 
-type NavCardProps = {
+type NavCardProps<THref extends PathString> = PathParamsWithProps<{
   avatar: React.ReactNode;
   title: string;
   description: string;
-  href: PathString;
-};
+  href: THref;
+}>;
 
-const NavCard = ({ avatar, title, description, href }: NavCardProps) => (
+const NavCard = <THref extends PathString>({ avatar, title, description, href }: NavCardProps<THref>) => (
   <WrapItem>
     <Box
       borderWidth={useColorModeValue('1px', undefined)}

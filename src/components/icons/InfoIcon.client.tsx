@@ -1,7 +1,8 @@
-import { Icon, type IconProps } from '@chakra-ui/react';
+import { Icon } from '@chakra-ui/react';
 import { MdOutlineInfo } from 'react-icons/md';
+import { type IconProps } from '~/utils/types';
 
-type InfoIconProps = Omit<IconProps, 'as'>;
+type InfoIconProps = IconProps;
 
 const InfoIcon = ({ fontSize = 24, ...props }: InfoIconProps) => (
   <Icon {...props} fontSize={fontSize} as={MdOutlineInfo} />
