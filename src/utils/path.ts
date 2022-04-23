@@ -1,3 +1,6 @@
+import { type GetServerSideProps } from 'next';
+import { type z, type ZodObject, type ZodRawShape } from 'zod';
+
 type SeparatePath<TPath extends string> = TPath extends `/${infer T}/${infer U}`
   ? T | SeparatePath<`/${U}`>
   : TPath extends `/${infer T}`
@@ -38,3 +41,22 @@ export const makePath = <TPath extends string>(...args: MakePathArgs<TPath>) => 
     })
     .join('/');
 };
+
+type PathParamsSchema = ZodObject<ZodRawShape>;
+
+type PathParamsGetCheckServerSideProps<TSchema extends PathParamsSchema, TProps> = (
+  context: Parameters<GetServerSideProps<TProps>>[0],
+  params: z.infer<TSchema>
+) => ReturnType<GetServerSideProps<TProps>>;
+
+export const pathParamsCheck =
+  <TSchema extends PathParamsSchema, TProps>(
+    schema: TSchema,
+    getServerSideProps: PathParamsGetCheckServerSideProps<TSchema, TProps>
+  ): GetServerSideProps =>
+  async (context) => {
+    const parsedParams = schema.safeParse(context.params);
+    if (parsedParams.success) return getServerSideProps(context, parsedParams.data);
+    console.error(parsedParams.error);
+    return { notFound: true };
+  };

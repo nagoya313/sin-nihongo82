@@ -14,7 +14,7 @@ export const connectDatabase = () => {
           break;
         }
         case 'error': {
-          console.log(event.error);
+          console.error(event.error);
         }
       }
     },

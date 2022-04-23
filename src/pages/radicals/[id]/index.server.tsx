@@ -1,4 +1,3 @@
-import { type GetServerSideProps } from 'next';
 import { Suspense } from 'react';
 import { z } from 'zod';
 import EditButton from '~/components/atoms/EditButton.client';
@@ -12,9 +11,9 @@ import { radicalKanjiQueryParams } from '~/features/kanji/query/params';
 import { Loadable } from '~/features/loadable';
 import { Path } from '~/features/path';
 import RadicalDefine from '~/features/radical/components/RadicalDefine.client';
+import { radicalPathParams } from '~/features/radical/path';
 import { radical } from '~/features/radical/query/radical.server';
-import { smallInt } from '~/libs/schema/postgres';
-import { numberPreprocess } from '~/libs/schema/preprocess';
+import { pathParamsCheck } from '~/utils/path';
 
 type RadicalProps = z.infer<typeof radicalKanjiQueryParams> & {
   radical: NonNullable<Awaited<ReturnType<typeof radical>>>;
@@ -54,17 +53,15 @@ const Radical = ({ radical, ...params }: RadicalProps) => {
 
 export default Radical;
 
-export const getServerSideProps: GetServerSideProps<RadicalProps> = async (context) => {
-  const parsedId = z.object({ id: numberPreprocess(smallInt) }).safeParse(context.query);
-  if (parsedId.success) {
-    const data = await radical(parsedId.data.id);
-    if (data != null)
-      return {
-        props: {
-          radical: data,
-          ...(JSON.parse((context.query['__props__'] as string) ?? '{}') as z.infer<typeof radicalKanjiQueryParams>),
-        },
-      };
+export const getServerSideProps = pathParamsCheck(radicalPathParams, async (context, { id }) => {
+  const data = await radical(id);
+  if (data != null) {
+    return {
+      props: {
+        radical: data,
+        ...(JSON.parse((context.query['__props__'] as string) ?? '{}') as z.infer<typeof radicalKanjiQueryParams>),
+      },
+    };
   }
   return { notFound: true };
-};
+});
