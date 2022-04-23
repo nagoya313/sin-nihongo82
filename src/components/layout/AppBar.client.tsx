@@ -2,8 +2,8 @@ import { Avatar, Flex, Heading, HStack, IconButton, LinkBox, LinkOverlay, useCol
 import NextLink from 'next/link';
 import { MdMenu } from 'react-icons/md';
 import { HEADER_HEIGHT } from '~/styles/constants';
-import AuthButton from '../atoms/AuthButton.client';
-import ColorChangeButton from '../atoms/ColorChangeButton.client';
+import AuthButton from './AuthButton.client';
+import ColorChangeButton from './ColorChangeButton.client';
 
 type AppBarProps = {
   onSideBarOpen: () => void;

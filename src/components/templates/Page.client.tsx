@@ -1,5 +1,5 @@
 import HeadTitle from '../atoms/HeadTitle.client';
-import Layout from '../organisms/Layout.client';
+import Layout from '../layout/Layout.client';
 
 type PageProps = {
   title?: string;

@@ -11,11 +11,11 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { MdSearch } from 'react-icons/md';
+import { type PropsWithChildren } from '~/utils/types';
 
-type SearchPanelProps = {
+type SearchPanelProps = PropsWithChildren<{
   isSearching?: boolean;
-  children: React.ReactNode;
-};
+}>;
 
 const SearchPanel = ({ children }: SearchPanelProps) => (
   <VStack

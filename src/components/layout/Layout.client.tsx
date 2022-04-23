@@ -15,9 +15,9 @@ import { setErrorMap } from 'zod';
 import { errorMap } from '~/libs/schema/errors/errorMap';
 import AppProvider from '~/providers/AppProvider';
 import { HEADER_HEIGHT } from '~/styles/constants';
-import SideBar from '../molecules/SideBar.client';
 import AppBar from './AppBar.client';
 import Footer from './Footer.client';
+import SideBar from './SideBar.client';
 
 setErrorMap((issue, ctx) => ({ message: errorMap(issue, ctx) }));
 

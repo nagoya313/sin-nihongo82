@@ -1,7 +1,7 @@
 import { Text } from '@chakra-ui/react';
 import HeadTitle from '../atoms/HeadTitle.client';
+import Layout from '../layout/Layout.client';
 import PageInfo from '../molecules/PageInfo.client';
-import Layout from '../organisms/Layout.client';
 
 type ErrorPageProps = {
   errorType: '404' | '500';
